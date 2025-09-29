@@ -24,6 +24,21 @@
 #
 #  ====================================================================
 
+/**
+ * Converts an array of text strings into a graph object for visualization.
+ *
+ * This function processes an array of search result texts, tokenizes them into words,
+ * and builds a graph structure with nodes representing unique words and links
+ * representing sequential word occurrences. It excludes specified words and pause marks.
+ * The graph size is capped to a maximum number of nodes.
+ *
+ * @param array $searchResultTextArr An array of strings, where each string is a text from a search result.
+ * @param array $excludes            An associative array of words to exclude from the graph, where keys are the words.
+ * @return array An associative array representing the graph, containing 'nodes', 'links', and a 'capped' flag.
+ *               'nodes': An array of unique words with their properties (id, word, size, x, y).
+ *               'links': An array of connections between nodes (source, target).
+ *               'capped': An integer indicating the maximum number of nodes if the cap was reached, otherwise 0.
+ */
 function textToGraph($searchResultTextArr,$excludes)
 {
 	global $pauseMarksFile, $lang;

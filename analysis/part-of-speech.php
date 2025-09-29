@@ -1,4 +1,21 @@
-<?php 
+<?php
+/**
+ * Part-of-Speech (POS) Query Tool Page
+ *
+ * This script renders the user interface for the Part-of-Speech (POS) query tool.
+ * It allows users to search the Quranic corpus for words matching a specific
+ * POS tag and, optionally, additional morphological features.
+ *
+ * The interface consists of:
+ * - A dropdown menu populated with all available POS tags from the QAC.
+ * - A text field for entering specific features (e.g., 'GEN' for genitive case).
+ *
+ * When the user makes a selection or clicks "Find", a JavaScript function sends an
+ * AJAX request to `pos.ajax.service.php`. The service returns the matching verses,
+ * which are then displayed on the page.
+ *
+ * @package QuranAnalysis
+ */
 #   PLEASE DO NOT REMOVE OR CHANGE THIS COPYRIGHT BLOCK
 #   ====================================================================
 #

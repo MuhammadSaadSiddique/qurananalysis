@@ -1,4 +1,20 @@
-<?php 
+<?php
+/**
+ * Buckwalter Transliteration Tool Page
+ *
+ * This script renders the user interface for the Buckwalter transliteration tool.
+ * It provides a simple form with a text input and a "Convert" button.
+ *
+ * When a user enters text (either Arabic or Buckwalter) and clicks the button,
+ * client-side JavaScript captures the input and sends an AJAX request to the
+ * `buckwalter-transliteration.ajax.service.php` endpoint. The service performs
+ * the appropriate conversion and returns the result, which is then displayed
+ * on this page without a full reload.
+ *
+ * The page uses the standard analysis section templates for a consistent layout.
+ *
+ * @package QuranAnalysis
+ */
 #   PLEASE DO NOT REMOVE OR CHANGE THIS COPYRIGHT BLOCK
 #   ====================================================================
 #

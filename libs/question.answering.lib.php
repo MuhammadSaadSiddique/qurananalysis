@@ -23,6 +23,22 @@
 #    back to www.qurananalysis.com and sufficient credits are given.
 #
 #  ====================================================================
+/**
+ * Attempts to answer a user's question by re-ranking a set of relevant verses.
+ *
+ * This function takes a user's query and an initial set of scored verses (documents)
+ * and applies several additional scoring factors to find the best answer. The factors
+ * include the presence of common concepts, concepts related to the question type (e.g., "Person" for "who"),
+ * and common word roots or derivations.
+ *
+ * @param string $query                  The original user query string.
+ * @param array  $queryWordsArr          An array of words from the query.
+ * @param array  $taggedSignificantWords An associative array of significant words from the query and their POS tags.
+ * @param array  $scoringTable           An initial ranking of relevant documents (verses) with their scores.
+ * @param string $lang                   The language of the query ('EN' or 'AR').
+ * @return array An array containing 'ANSWER_CONCEPTS' (concepts related to the query) and
+ *               'ANSWER_VERSES' (the final, re-ranked list of top answer verses).
+ */
 function answerUserQuestion($query, $queryWordsArr,$taggedSignificantWords,$scoringTable, $lang)
 {
 
@@ -307,6 +323,13 @@ function answerUserQuestion($query, $queryWordsArr,$taggedSignificantWords,$scor
 
 }
 
+/**
+ * Removes question-related words (e.g., "who", "what") from a target array of words.
+ *
+ * @param array  $targetArr The array of words to filter.
+ * @param string $lang      The language ('EN' or 'AR') to determine which question words to remove.
+ * @return array The filtered array with question words removed.
+ */
 function removeQuestionCluesFromArr($targetArr,$lang)
 {
 	if ( $lang=="EN")
@@ -341,6 +364,11 @@ function removeQuestionCluesFromArr($targetArr,$lang)
 }
 
 
+/**
+ * Gets a list of supported Arabic question words and their corresponding types.
+ *
+ * @return array An associative array where keys are Arabic question phrases and values are their types (e.g., "Person").
+ */
 function getSupportedArabicQuestionTypes()
 {
 	$arabicQuestionWords = array();
@@ -356,6 +384,11 @@ function getSupportedArabicQuestionTypes()
 	return $arabicQuestionWords;
 }
 
+/**
+ * Gets a list of supported English question words and their corresponding types.
+ *
+ * @return array An associative array where keys are English question words and values are their types (e.g., "Person").
+ */
 function getSupportedEnglishQuestionTypes()
 {
 	$englishQuestionWords = array();
@@ -368,6 +401,13 @@ function getSupportedEnglishQuestionTypes()
 	return $englishQuestionWords;
 }
 
+/**
+ * Checks if a query string starts with a known question word and returns the question type if it does.
+ *
+ * @param string $query The query string to check.
+ * @param string $lang  The language of the query ('EN' or 'AR').
+ * @return string|false The type of the question if a known question word is found at the beginning, otherwise false.
+ */
 function  containsQuestionWords($query,$lang)
 {
 

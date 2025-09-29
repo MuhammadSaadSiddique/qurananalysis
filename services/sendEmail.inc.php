@@ -1,4 +1,20 @@
-<?php 
+<?php
+/**
+ * Email Sending Service (Include)
+ *
+ * This script is a reusable component for sending email notifications. It is
+ * designed to be included by other service scripts (like feedback or subscription
+ * handlers) that need to send an email.
+ *
+ * It constructs the necessary email headers for deliverability and uses the native
+ * PHP `mail()` function to send the message.
+ *
+ * **Important**: The including script MUST define the `$body` variable, which
+ * contains the HTML content of the email, before including this file. The recipient
+ * email address is hardcoded within this script.
+ *
+ * @package QuranAnalysis
+ */
 #   PLEASE DO NOT REMOVE OR CHANGE THIS COPYRIGHT BLOCK
 #   ====================================================================
 #

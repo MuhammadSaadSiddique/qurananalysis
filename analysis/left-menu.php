@@ -1,4 +1,18 @@
-<?php 
+<?php
+/**
+ * Left Navigation Menu for Analysis Section
+ *
+ * This script generates the left-hand navigation menu for all pages within the
+ * 'analysis' section. It creates a list of links to the various analysis tools.
+ *
+ * It dynamically checks the current page using `isCurrentPage()` and adds a
+ * `selected='1'` attribute to the active link, allowing for CSS styling to
+ * highlight the user's current location in the menu. It also includes a
+ * language switcher dropdown that is displayed on all analysis pages except for
+ * the main analysis index page.
+ *
+ * @package QuranAnalysis
+ */
 #   PLEASE DO NOT REMOVE OR CHANGE THIS COPYRIGHT BLOCK
 #   ====================================================================
 #

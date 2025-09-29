@@ -1,4 +1,20 @@
-<?php 
+<?php
+/**
+ * Word Collocation Analysis Tool Page
+ *
+ * This script renders the user interface for the Word Collocation analysis tool.
+ * It provides a text input field where users can enter an Arabic word or a
+ * Part-of-Speech (POS) tag to analyze its context.
+ *
+ * When the "Context" button is clicked, a JavaScript function sends an AJAX request
+ * to the `wordcontext-collocation.ajax.service.php` backend. The service calculates
+ * the frequency of words/tags that appear immediately before and after the target
+ * term throughout the corpus and returns the results for display.
+ *
+ * The page uses the standard analysis section templates for a consistent layout.
+ *
+ * @package QuranAnalysis
+ */
 #   PLEASE DO NOT REMOVE OR CHANGE THIS COPYRIGHT BLOCK
 #   ====================================================================
 #

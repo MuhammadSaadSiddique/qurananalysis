@@ -1,4 +1,23 @@
-<?php 
+<?php
+/**
+ * AJAX Service for Part-of-Speech (POS) Queries
+ *
+ * This script serves as the backend for the POS Query tool. It is designed to be
+ * called via an AJAX request to find all occurrences of a specific grammatical
+ * feature in the Quranic Arabic Corpus (QAC).
+ *
+ * It expects the following GET parameters:
+ * - `pos`: The Part-of-Speech tag to search for (e.g., 'N', 'V', 'ADJ').
+ * - `features`: (Optional) A comma-separated string of morphological features to
+ *   filter by (e.g., 'GEN' for genitive).
+ *
+ * The script queries the cached QAC model, collects all matching word segments,
+ * and compiles a list of unique words and all verses where they appear. The matching
+ * segments within the verses are highlighted. The final output is an HTML block
+ * containing statistics, the list of distinct words, and the list of verses.
+ *
+ * @package QuranAnalysis
+ */
 #   PLEASE DO NOT REMOVE OR CHANGE THIS COPYRIGHT BLOCK
 #   ====================================================================
 #

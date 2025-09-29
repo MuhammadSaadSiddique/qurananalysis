@@ -25,6 +25,13 @@
 #  ====================================================================
 
 	
+	/**
+	 * Pretty-prints an array in a readable format.
+	 *
+	 * @param array $arr The array to print.
+	 * @param bool  $absPos Whether to use absolute positioning for the output.
+	 * @return void
+	 */
 	function preprint_r($arr,$absPos=false)
 	{
 		if ( $absPos)
@@ -38,16 +45,33 @@
 	}
 	
 	
+	/**
+	 * Echoes a string followed by a newline and a <br> tag.
+	 *
+	 * @param string $str The string to echo.
+	 * @return void
+	 */
 	function echoN($str)
 	{
 		echo($str."\n<br>");
 	}
 	
+	/**
+	 * Prints the basic HTML page header for a print page.
+	 *
+	 * @return void
+	 */
 	function printHTMLPageHeader()
 	{
 		echo("<html lang='en-US'><head><title>Print Page</title><meta charset='utf-8'></head><body>");
 	}
 	
+	/**
+	 * Converts a multibyte string to an array of ordinal values.
+	 *
+	 * @param string $str The multibyte string.
+	 * @return int[] An array of ordinal values.
+	 */
 	function multibyteStringOrdinal($str)
 	{
 	
@@ -69,6 +93,12 @@
 		return $ordinals;
 	}
 		
+	/**
+	 * Gets the ordinal value of the first character in a multibyte string.
+	 *
+	 * @param string $str The multibyte string.
+	 * @return int The ordinal value of the first character.
+	 */
 	function multibyteCharOrdinal($str)
 	{       
 
@@ -83,6 +113,14 @@
 	    return $charDecValArr[1];
 	}
 	
+	/**
+	 * Displays hidden characters in a string for debugging purposes.
+	 *
+	 * @param string $text The input string.
+	 * @param string $lang The language of the string ('AR' for Arabic, otherwise treated as single-byte).
+	 * @param bool   $exit Whether to terminate the script after execution.
+	 * @return void
+	 */
 	function showHiddenChars($text,$lang="AR",$exit=true)
 	{
 		 
@@ -108,6 +146,12 @@
 				
 	}
 	
+	/**
+	 * Adds commas to a number string for formatting.
+	 *
+	 * @param string $numStr The number string.
+	 * @return string The formatted number string with commas.
+	 */
 	function addCommasToNumber($numStr)
 	{
 		$negativeFlag=false;
@@ -146,6 +190,13 @@
 	}
 	
 
+	/**
+	 * Sorts an array of associative arrays by a specified field in reverse order.
+	 *
+	 * @param array  &$arrayToSort The array to sort.
+	 * @param string $field The field to sort by.
+	 * @return void
+	 */
 	function rsortBy(&$arrayToSort, $field)
 	{
 		
@@ -174,6 +225,15 @@
 	
 	
 	
+	/**
+	 * Logs a search query to a file.
+	 *
+	 * @param string $lang The language of the query.
+	 * @param string $query The search query.
+	 * @param string $searchType The type of search performed.
+	 * @param int    $resultCount The number of results found.
+	 * @return void
+	 */
 	function logQuery($lang,$query,$searchType,$resultCount)
 	{
 		
@@ -187,6 +247,12 @@
 	
 
 
+	/**
+	 * Shuffles an associative array while maintaining key-value pairs.
+	 *
+	 * @param array &$arr The array to shuffle.
+	 * @return void
+	 */
 	function shuffle_assoc(&$arr)
 	{
 		$keys = array_keys($arr);
@@ -201,6 +267,12 @@
 		$arr = $shuffled_array;
 	}
 	
+	/**
+	 * Removes Arabic diacritics (Tashkeel) from a string.
+	 *
+	 * @param string $str The input string.
+	 * @return string The string without diacritics.
+	 */
 	function removeTashkeel($str)
 	{
 		return preg_replace("/[\x{0618}-\x{061A}\x{064B}-\x{0654}\x{0670}\x{06DC}\x{06DF}\x{06E0}\x{06E2}\x{06E3}\x{06E5}\x{06E6}\x{06E8}\x{06EA}-\x{06ED}]/um","",$str);
@@ -243,11 +315,13 @@
 		 */
 	}
 	
-	/*
-	 * Shallow non-exhaustive conversion from uthmani ito simple
-	 * Shoud ONLY be used for non quranic words, for words in the quran use UTHMANI_TO_SIMPLE_WORD_MAP table
-	 * 
-	 * One of the uses to to group uthmani words such as lemmas
+	/**
+	 * Performs a shallow, non-exhaustive conversion from Uthmani script to simple Arabic script.
+	 * This should ONLY be used for non-Quranic words. For Quranic words, use the UTHMANI_TO_SIMPLE_WORD_MAP table.
+	 * One of its uses is to group Uthmani words such as lemmas.
+	 *
+	 * @param string $str The Uthmani script string.
+	 * @return string The converted simple script string.
 	 */
 	function shallowUthmaniToSimpleConversion($str)
 	{
@@ -313,12 +387,24 @@
 		*/
 	}
 	
+	/**
+	 * Strips the Byte Order Mark (BOM) from a string.
+	 *
+	 * @param string $str The input string.
+	 * @return string The string without the BOM.
+	 */
 	function stripBOM($str)
 	{
 		$BOM =  chr(239) . chr(187) . chr(191);
 		return trim(($str),$BOM);
 	}
 	
+	/**
+	 * Cleans and trims a string by removing whitespace and a specific set of special characters.
+	 *
+	 * @param string $str The input string.
+	 * @return string The cleaned and trimmed string.
+	 */
 	function cleanAndTrim($str)
 	{
 		//« spoils arabic words = 0xab

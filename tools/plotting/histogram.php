@@ -1,4 +1,17 @@
-<?php 
+<?php
+/**
+ * Histogram Plotting Tool
+ *
+ * This script generates a histogram chart using the Google Charts API. It is designed
+ * to be loaded within an iframe to display a visualization of a given dataset.
+ *
+ * The script retrieves the data to be plotted from the `$_SESSION['PLOTTING_DATA']`
+ * session variable. The calling script is responsible for setting this session data
+ * before loading this page. The data is then formatted into a JavaScript array and
+ * used by the Google Charts library to render the histogram.
+ *
+ * @package QuranAnalysis
+ */
 #   PLEASE DO NOT REMOVE OR CHANGE THIS COPYRIGHT BLOCK
 #   ====================================================================
 #

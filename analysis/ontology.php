@@ -1,4 +1,18 @@
-<?php 
+<?php
+/**
+ * Ontology Data Viewer Page
+ *
+ * This script provides a simple interface to view the raw data of the generated
+ * Quran Analysis Ontology. It reads the final serialized arrays of concepts and
+ * relations from the `data/ontology/extraction/` directory.
+ *
+ * The page then displays this data in two side-by-side tables: one for all the
+ * concepts in the ontology and one for all the extracted relationships (triples).
+ * This serves as a quick inspection tool for developers and researchers to browse
+ * the contents of the ontology without needing an OWL viewer.
+ *
+ * @package QuranAnalysis
+ */
 #   PLEASE DO NOT REMOVE OR CHANGE THIS COPYRIGHT BLOCK
 #   ====================================================================
 #

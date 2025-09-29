@@ -1,4 +1,21 @@
-<?php 
+<?php
+/**
+ * AJAX Service for Finding Verses with Pause Marks
+ *
+ * This script serves as an AJAX endpoint for the Pause Marks analysis tool.
+ * It is designed to find and return all verses that contain a specific
+ * Quranic pause mark.
+ *
+ * The script expects the following GET parameters:
+ * - `lang`: The language of the corpus to search (e.g., 'AR'). Note that this
+ *           service is only functional for Arabic.
+ * - `mark`: The specific pause mark character to search for.
+ *
+ * It iterates through the entire Quran text, finds matching verses, highlights
+ * the pause mark within the text, and returns the results as an HTML table.
+ *
+ * @package QuranAnalysis
+ */
 #   PLEASE DO NOT REMOVE OR CHANGE THIS COPYRIGHT BLOCK
 #   ====================================================================
 #

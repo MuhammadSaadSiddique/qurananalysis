@@ -1,4 +1,18 @@
-<?php 
+<?php
+/**
+ * Developer Code Scratchpad
+ *
+ * This file serves as a development scratchpad for testing and debugging various
+ * parts of the application's data models and functions. It includes sample code
+ * for loading models, fetching data from QAC, iterating through ontology concepts,
+ * and querying WordNet.
+ *
+ * This file is not part of the main application flow and should not be deployed
+ * to a production environment.
+ *
+ * @package QuranAnalysis
+ * @author Karim Ouda
+ */
 #   PLEASE DO NOT REMOVE OR CHANGE THIS COPYRIGHT BLOCK
 #   ====================================================================
 #

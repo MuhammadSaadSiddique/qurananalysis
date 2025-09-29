@@ -1,4 +1,23 @@
-<?php 
+<?php
+/**
+ * Lightweight Search Results AJAX Service
+ *
+ * This script serves as a lightweight AJAX endpoint for processing search queries.
+ * It is similar to `search/index.php` but returns a more focused set of results,
+ * making it suitable for contexts where only the verse list is required without the
+ * accompanying visualizations.
+ *
+ * The script performs the following actions:
+ * 1.  It includes `query.handling.common.php` to parse the query, perform
+ *     query expansion, and retrieve a scored list of relevant documents.
+ * 2.  It includes `search.result.statement.inc.php` to show a summary of the results.
+ * 3.  It calls `printResultVerses()` to render the list of matching verses.
+ *
+ * Unlike the main search service, this script does not generate the ontology graph,
+ * word cloud, or statistics charts.
+ *
+ * @package QuranAnalysis
+ */
 #   PLEASE DO NOT REMOVE OR CHANGE THIS COPYRIGHT BLOCK
 #   ====================================================================
 #

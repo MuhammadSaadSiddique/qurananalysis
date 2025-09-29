@@ -1,4 +1,29 @@
-<?php 
+<?php
+/**
+ * Ontology Extraction and Generation Script
+ *
+ * This is a powerful, multi-stage administrative script responsible for building the
+ * entire Quranic ontology from the ground up. It processes various source corpora
+ * (Quran text, QAC, Qurana, WordNet, DBPedia) to extract concepts, identify relationships,
+ * enrich metadata, and finally serialize the complete ontology into an OWL file.
+ *
+ * The script's execution is controlled by a series of boolean flags, allowing a developer
+ * to run the entire pipeline or only specific stages. This is useful for debugging and
+ * incremental development of the ontology.
+ *
+ * The main stages of the pipeline are:
+ * 1.  Term & Concept Generation: Extracts candidate concepts from the corpus.
+ * 2.  Relation Extraction: Identifies taxonomic (is-a) and non-taxonomic relationships.
+ * 3.  Metadata Enrichment: Fetches and integrates data from external sources like DBPedia and WordNet.
+ * 4.  Cleaning & Post-processing: Filters excluded items and merges duplicate concepts.
+ * 5.  OWL File Generation: Writes the final ontology to `data/ontology/qa.ontology.v1.owl`.
+ *
+ * Note: This is a developer tool and is not intended for public execution. It is resource-intensive
+ * and requires all data models and external libraries to be correctly configured.
+ *
+ * @package QuranAnalysis
+ * @author Karim Ouda
+ */
 #   PLEASE DO NOT REMOVE OR CHANGE THIS COPYRIGHT BLOCK
 #   ====================================================================
 #

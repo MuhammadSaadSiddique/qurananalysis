@@ -1,4 +1,14 @@
-<?php 
+<?php
+/**
+ * Analysis Section End Template
+ *
+ * This file provides the closing HTML tags for the two-column layout started
+ * in `analysis.template.start.code.php`. It closes the table cell and the main table.
+ * It also includes a small JavaScript snippet to apply custom CSS styling to the
+ * main logo specifically for the analysis pages.
+ *
+ * @package QuranAnalysis
+ */
 #   PLEASE DO NOT REMOVE OR CHANGE THIS COPYRIGHT BLOCK
 #   ====================================================================
 #

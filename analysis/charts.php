@@ -1,4 +1,19 @@
-<?php 
+<?php
+/**
+ * Quran Analysis Charts Page
+ *
+ * This script generates a page that displays various analytical charts related to the
+ * Quranic corpus. Currently, it features a bar chart showing the distribution of
+ * verses per chapter (Sura).
+ *
+ * It retrieves the pre-computed totals from the core data model, formats the
+ * verse-per-chapter data into a JSON array, and then uses the client-side
+ * JavaScript function `drawChart()` to render the visualization.
+ *
+ * The page uses the standard analysis section templates for a consistent layout.
+ *
+ * @package QuranAnalysis
+ */
 #   PLEASE DO NOT REMOVE OR CHANGE THIS COPYRIGHT BLOCK
 #   ====================================================================
 #

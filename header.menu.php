@@ -1,4 +1,13 @@
-<?php 
+<?php
+/**
+ * Header Menu Template
+ *
+ * This file contains the HTML and PHP code for the website's main header menu.
+ * It displays the site logo and the primary navigation links (Search, Explore, Analyze).
+ * The logo image can be dynamically changed via a 'logo' GET parameter.
+ *
+ * @package QuranAnalysis
+ */
 #   PLEASE DO NOT REMOVE OR CHANGE THIS COPYRIGHT BLOCK
 #   ====================================================================
 #

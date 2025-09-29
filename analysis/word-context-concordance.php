@@ -1,4 +1,21 @@
-<?php 
+<?php
+/**
+ * Word Concordance Analysis Tool Page
+ *
+ * This script renders the user interface for the Word Concordance analysis tool.
+ * It provides input fields for a user to specify an Arabic word or a Part-of-Speech
+ * (POS) tag, as well as a "context level" to determine the number of surrounding
+ * words to display.
+ *
+ * Upon clicking the "Concordance" button, a JavaScript function sends an AJAX
+ * request to the `wordcontext-concordance.ajax.service.php` backend. The service
+ * retrieves all occurrences of the target term and their surrounding context,
+ * which are then displayed on this page.
+ *
+ * The page uses the standard analysis section templates for a consistent layout.
+ *
+ * @package QuranAnalysis
+ */
 #   PLEASE DO NOT REMOVE OR CHANGE THIS COPYRIGHT BLOCK
 #   ====================================================================
 #

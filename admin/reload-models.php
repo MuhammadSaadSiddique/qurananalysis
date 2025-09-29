@@ -1,4 +1,23 @@
-<?php 
+<?php
+/**
+ * Data Model Cache Reloader
+ *
+ * This administrative script is a developer utility used to force a complete
+ * refresh of the application's data models stored in the APC cache.
+ *
+ * It performs the following actions:
+ * 1. Clears the entire APC user cache.
+ * 2. Triggers the `loadModels()` function to parse all raw data files and
+ *    rebuild the data models from scratch.
+ * 3. Stores the newly built models back into the APC cache.
+ *
+ * This is essential during development when underlying data sources or the
+ * model generation logic in `model.loader.php` have been modified. It outputs
+ * cache memory information before and after the process for debugging purposes.
+ *
+ * @package QuranAnalysis
+ * @author Karim Ouda
+ */
 #   PLEASE DO NOT REMOVE OR CHANGE THIS COPYRIGHT BLOCK
 #   ====================================================================
 #

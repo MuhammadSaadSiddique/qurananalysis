@@ -26,9 +26,14 @@
 require_once(dirname(__FILE__)."/core.lib.php");
 require_once(dirname(__FILE__)."/pos.tagger.lib.php");
 
-/*
- * Get second level similarity distance by counting the common unique characters in both strings
- * The higher the distance the more both strings are similar
+/**
+ * Calculates a similarity score based on the number of common unique characters between two strings.
+ * The higher the score, the more similar the strings are considered. Extra points are awarded if the
+ * first and last characters also match.
+ *
+ * @param string $word1 The first word.
+ * @param string $word2 The second word.
+ * @return int The similarity score.
  */
 function getDistanceByCommonUniqueChars($word1,$word2)
 {
@@ -64,6 +69,14 @@ function getDistanceByCommonUniqueChars($word1,$word2)
     return (mb_strlen($commonChars)+$extraPoints);
 }
 
+/**
+ * Finds words in the Quranic corpus that are similar to the given query words.
+ * It uses a combination of Levenshtein distance and common unique character count to determine similarity.
+ *
+ * @param string $lang       The language of the query ('EN' or 'AR').
+ * @param array  $queryWords An array of words from the user's query.
+ * @return array An associative array of similar words found in the corpus, with their similarity scores, sorted in descending order.
+ */
 function getSimilarWords($lang,$queryWords)
 {
 
@@ -124,6 +137,19 @@ function getSimilarWords($lang,$queryWords)
 	
 }
 
+/**
+ * Adds an entry to a batch array for the inverted index, which can later be stored in APC.
+ *
+ * @param array  &$invertedIndexBatchApcArr The batch array for the inverted index, passed by reference.
+ * @param string $lang                      The language of the word.
+ * @param string $word                      The word (index term).
+ * @param int    $suraID                    The Sura ID where the word appears.
+ * @param int    $verseID                   The Verse ID where the word appears.
+ * @param int    $wordIndex                 The index of the word within the verse.
+ * @param string $wordType                  The type of the word (e.g., "NORMAL_WORD", "ROOT").
+ * @param mixed  $extraInfo                 Optional extra information about the word.
+ * @return void
+ */
 function addToInvertedIndex(&$invertedIndexBatchApcArr,$lang,$word,$suraID,$verseID,$wordIndex,$wordType,$extraInfo=null)
 {
 
@@ -150,6 +176,15 @@ function addToInvertedIndex(&$invertedIndexBatchApcArr,$lang,$word,$suraID,$vers
 
 
 
+/**
+ * Tags the user's query with Part-of-Speech (POS) information.
+ * For English, it uses the PosTagger class. For Arabic, it performs a simple stopword check
+ * and defaults other words to 'NN' (noun).
+ *
+ * @param string $query The user query string.
+ * @param string $lang  The language of the query ('EN' or 'AR').
+ * @return array An associative array of significant words from the query and their POS tags.
+ */
 function posTagUserQuery($query, $lang)
 {
 
@@ -202,7 +237,19 @@ function posTagUserQuery($query, $lang)
 	
 		return $taggedSignificantWords;
 }
-//TODO: ADD SYNONYMS ENRICHMENT
+
+/**
+ * Extends the list of query words by adding morphological derivations.
+ * For English, it adds simple plural/singular forms.
+ * For Arabic, it finds similar words from the ontology concepts and their synonyms based on Levenshtein distance
+ * and common character counts, then attempts to identify and add derivations (e.g., singular/plural forms).
+ *
+ * TODO: Add synonym enrichment.
+ *
+ * @param array  $taggedSignificantWords An associative array of tagged words from the query.
+ * @param string $lang                   The language of the query ('EN' or 'AR').
+ * @return array The extended list of tagged significant words.
+ */
 function extendQueryWordsByDerivations($taggedSignificantWords,$lang)
 {
 
@@ -371,6 +418,14 @@ function extendQueryWordsByDerivations($taggedSignificantWords,$lang)
 	return $taggedSignificantWords;
 }
 
+/**
+ * Extends the query words by adding related concepts based on taxonomic (is-a) and other relations from the ontology.
+ *
+ * @param array  $extendedQueryArr The current array of extended query words.
+ * @param string $lang             The language of the query ('EN' or 'AR').
+ * @param bool   $isQuestion       Flag indicating if the query is a question.
+ * @return array An array of unique concepts related to the original query words.
+ */
 function extendQueryWordsByConceptTaxRelations($extendedQueryArr,$lang,$isQuestion = false)
 {
 	global  $is_a_relation_name_ar,$thing_class_name_en,$thing_class_name_ar,$TRANSLATION_MAP_EN_TO_AR;
@@ -617,6 +672,12 @@ function extendQueryWordsByConceptTaxRelations($extendedQueryArr,$lang,$isQuesti
 	return $conceptsFromTaxRelations;
 }
 
+/**
+ * Extends the query words by extracting derivations (roots and stems) from the Quranic Arabic Corpus (QAC).
+ *
+ * @param array $extendedQueryWordsArr The current array of extended query words.
+ * @return array The query words array extended with roots and stems.
+ */
 function extendQueryByExtractingQACDerviations($extendedQueryWordsArr)
 {
 	global $MODEL_SEARCH;

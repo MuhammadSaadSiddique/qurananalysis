@@ -1,4 +1,22 @@
 <?php
+/**
+ * Feedback Submission Service
+ *
+ * This script handles the submission of user feedback from the feedback form.
+ * It is called via an AJAX POST request.
+ *
+ * It expects the following POST parameters:
+ * - `name`: The user's name.
+ * - `email`: The user's email address.
+ * - `feedbackType`: The type of feedback (e.g., bug report, suggestion).
+ * - `feedbackText`: The main content of the feedback message.
+ *
+ * The script saves the submitted feedback to the `Feedback` table in the
+ * SQLite database and then includes `sendEmail.inc.php` to send an email
+ * notification. It returns "DONE" on success or an error message on failure.
+ *
+ * @package QuranAnalysis
+ */
 #   PLEASE DO NOT REMOVE OR CHANGE THIS COPYRIGHT BLOCK
 #   ====================================================================
 #

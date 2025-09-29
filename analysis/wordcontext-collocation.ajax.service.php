@@ -1,4 +1,26 @@
-<?php 
+<?php
+/**
+ * AJAX Service for Word/POS Collocation Analysis
+ *
+ * This script serves as the backend for the Collocation analysis tool. It is
+ * designed to be called via an AJAX request to find and display the collocates
+ * (neighboring words or POS tags) for a given target word or POS tag.
+ *
+ * It expects the following GET parameters:
+ * - `word`: The target word or POS tag to analyze.
+ * - `lang`: The language of the input.
+ *
+ * The script first determines if the target is a word or a POS tag. It then
+ * processes the entire Quranic corpus, broken down into sub-sentences, to find
+ * all occurrences of the target. For each occurrence, it collects the words/tags
+ * that appear up to 3 positions before and after the target.
+ *
+ * The final output is an HTML table that presents the target in the center column,
+ * with the preceding collocates on the left and succeeding collocates on the right,
+ * all sorted by frequency.
+ *
+ * @package QuranAnalysis
+ */
 #   PLEASE DO NOT REMOVE OR CHANGE THIS COPYRIGHT BLOCK
 #   ====================================================================
 #

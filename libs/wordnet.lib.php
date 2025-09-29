@@ -26,14 +26,22 @@
 require_once(dirname(__FILE__)."/../global.settings.php");
 
 /**
- * 
- * Replace undrscore with space for multi-word concepts
+ * Replaces underscores with spaces for multi-word concepts from WordNet.
+ *
+ * @param string $str The input string, potentially with underscores.
+ * @return string The cleaned string.
  */
 function cleanWordnetCollocation($str)
 {
 	return strtr($str,"_", " ");
 }
 
+/**
+ * Checks if a WordNet semantic type is one that should be excluded.
+ *
+ * @param string $type The semantic type string.
+ * @return bool True if the type is in the exclusion list, false otherwise.
+ */
 function isExcludableSemanticType($type)
 {
 	$type = trim(strtolower($type));
@@ -47,6 +55,12 @@ function isExcludableSemanticType($type)
 	return false;
 }
 
+/**
+ * Retrieves the human-readable description for a WordNet pointer symbol.
+ *
+ * @param string $symbol The WordNet pointer symbol (e.g., "@", "~", "#m").
+ * @return string The description of the relationship represented by the symbol.
+ */
 function getSymbolDescriptionFromMappingTable($symbol)
 {
 	//for nouns
@@ -94,6 +108,11 @@ function getSymbolDescriptionFromMappingTable($symbol)
 }
 
 
+/**
+ * Loads the WordNet lexicographer file names (lexnames) which map semantic category IDs to their descriptions.
+ *
+ * @return array An associative array where keys are category IDs and values are their descriptions.
+ */
 function getLexicoSemanticCategories()
 {
 	global $wordnetDir;
@@ -115,6 +134,13 @@ function getLexicoSemanticCategories()
 	return $lexographerArr;
 }
 
+/**
+ * Populates the WordNet index array by parsing an `index.<pos>` file.
+ *
+ * @param array  &$wordnetIndex The main WordNet index array, passed by reference.
+ * @param string $pos           The Part-of-Speech to load (e.g., "noun", "verb").
+ * @return array|false The populated index array portion for the given POS, or false on file error.
+ */
 function populateIndexArrByPoS(&$wordnetIndex,$pos)
 {
 	global $wordnetDir;
@@ -203,7 +229,12 @@ function populateIndexArrByPoS(&$wordnetIndex,$pos)
 }
 
 
-
+/**
+ * Parses a WordNet `data.<pos>` file and returns its contents as a structured array.
+ *
+ * @param string $pos The Part-of-Speech data file to load (e.g., "noun", "verb").
+ * @return array|false An associative array of synset data, keyed by offset, or false on file error.
+ */
 function getSynsetDataByPoS($pos)
 {
 	global $wordnetDir;
@@ -306,12 +337,26 @@ function getSynsetDataByPoS($pos)
 		return $dataArr;
 }
 
+/**
+ * Converts a short Part-of-Speech tag from WordNet to its full name.
+ *
+ * @param string $smallPOS The short POS tag (e.g., 'n', 'v', 'a', 'r').
+ * @return string The full POS name (e.g., 'noun', 'verb', 'adj', 'adv').
+ */
 function getLongPoSName($smallPOS)
 {
 	$trans = array("n" => "noun", "v" => "verb", "a" => "adj", "s" => "adj", "r" => "adv");
 	return  strtr($smallPOS,$trans);
 }
 
+/**
+ * Loads the WordNet database files into memory, using APC for caching.
+ * If the data is not in the cache, it parses the index and data files for all parts of speech.
+ *
+ * @param array &$MODEL_WORDNET The model array to be populated with WordNet data, passed by reference.
+ * @return bool True on success.
+ * @throws Exception If caching fails.
+ */
 function loadWordnet(&$MODEL_WORDNET)
 {
 
@@ -367,6 +412,14 @@ function loadWordnet(&$MODEL_WORDNET)
 	
 }
 
+/**
+ * Retrieves a full entry for a given word from the loaded WordNet model.
+ *
+ * @param string $wordToSearchFor             The word to look up.
+ * @param string $includeOnlyRelationsOfType  (Not implemented) A parameter to filter relations.
+ * @return array|false A structured array containing all information for the word (synonyms, POS, glossary, relations), or false if not found.
+ * @throws Exception If the WordNet model is not loaded.
+ */
 function getWordnetEntryByWordString($wordToSearchFor, $includeOnlyRelationsOfType="")
 {
 	global $MODEL_WORDNET;
@@ -482,6 +535,12 @@ function getWordnetEntryByWordString($wordToSearchFor, $includeOnlyRelationsOfTy
 	
 }
 
+/**
+ * Extracts the first part of a WordNet glossary string, up to the first semicolon.
+ *
+ * @param string $glossary The full glossary string.
+ * @return string The first part of the glossary.
+ */
 function getGlossaryFirstPart($glossary)
 {
 

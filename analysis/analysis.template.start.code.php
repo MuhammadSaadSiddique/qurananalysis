@@ -1,4 +1,18 @@
- <?php 
+ <?php
+/**
+ * Analysis Section Start Template
+ *
+ * This file provides the common starting HTML and PHP code for all pages
+ * within the 'analysis' section of the website. It includes the main site header,
+ * the header menu, and sets up a two-column layout. The left column is
+ * populated with the analysis-specific navigation menu (`left-menu.php`),
+ * and the right column is opened for the specific page's content to be inserted.
+ *
+ * This template is typically paired with `analysis.template.end.code.php` to
+ * complete the page structure.
+ *
+ * @package QuranAnalysis
+ */
  #   PLEASE DO NOT REMOVE OR CHANGE THIS COPYRIGHT BLOCK
  #   ====================================================================
  #

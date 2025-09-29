@@ -1,4 +1,16 @@
-<?php 
+<?php
+/**
+ * Data Model Loader
+ *
+ * This script is responsible for loading all necessary data models for the Quran Analysis application.
+ * It handles the initial parsing and processing of various data sources (Quran text, translations,
+ * QAC, WordNet, Ontology, etc.) and stores the resulting structured data into APC (Alternative PHP Cache)
+ * for fast retrieval in subsequent requests.
+ *
+ * If the models are already present in the cache, it loads them directly from there to improve performance.
+ *
+ * @package QuranAnalysis
+ */
 #   PLEASE DO NOT REMOVE OR CHANGE THIS COPYRIGHT BLOCK
 #   ====================================================================
 #
@@ -83,6 +95,19 @@ $TRANSLITERATION_VERSES_MAP = array();
 $TRANSLITERATION_WORDS_LOCATION_MAP = array();
 $TRANSLITERATION_WORDS_INDEX = array();
 
+/**
+ * Orchestrates the loading of all required data models.
+ *
+ * This function checks if the core models are already cached in APC. If they are, it loads them
+ * from the cache. If not, it triggers a full build process by parsing all raw data files
+ * (Quran texts, translations, ontologies, etc.), processing them into structured arrays,
+ * and storing them in the cache for subsequent requests.
+ *
+ * @param string $modelsToBeLoaded A comma-separated string of model names to be loaded (e.g., "core,search").
+ * @param string $lang             The primary language for which to load the models.
+ * @return void
+ * @throws Exception If APC is not available.
+ */
 function loadModels($modelsToBeLoaded,$lang)
 {
 	
@@ -1099,6 +1124,18 @@ function loadModels($modelsToBeLoaded,$lang)
 	
 }
 
+/**
+ * Loads a specific data model for a given language from a source file.
+ * This function handles the parsing of the source file (TXT or XML), processes the data,
+ * and builds various in-memory data structures like Quran text arrays, frequency counts,
+ * and inverted indexes. It is called by `loadModels` when a model is not found in the cache.
+ *
+ * @param string $lang The language of the model to load (e.g., 'AR', 'EN').
+ * @param string $type The type of the source file ('TXT' or 'XML').
+ * @param string $file The path to the source data file.
+ * @return void
+ * @throws Exception If the source file type is invalid.
+ */
 function loadModel($lang,$type,$file)
 {
 		global $WORDS_FREQUENCY_ARR,$TOTALS_ARR,$MODEL_CORE,$MODEL_SEARCH,$MODEL_QAC,$MODEL_QURANA;

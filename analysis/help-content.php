@@ -1,4 +1,16 @@
-<?php 
+<?php
+/**
+ * Context-Sensitive Help Content for Analysis Pages
+ *
+ * This script is included in various pages within the 'analysis' section to provide
+ * context-specific help information. It checks the current page's URL
+ * (`$_SERVER['PHP_SELF']`) and displays a relevant help message explaining the
+ * purpose and functionality of the specific analysis tool being viewed.
+ *
+ * The help content is displayed within a collapsible div, triggered by a help icon.
+ *
+ * @package QuranAnalysis
+ */
 #   PLEASE DO NOT REMOVE OR CHANGE THIS COPYRIGHT BLOCK
 #   ====================================================================
 #

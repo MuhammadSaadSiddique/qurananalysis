@@ -1,4 +1,23 @@
-<?php 
+<?php
+/**
+ * Interactive Ontology Cleaning Tool
+ *
+ * This script provides a web-based user interface for manually curating and cleaning
+ * the generated ontology. It allows an administrator to step through each concept
+ * one by one and review all its associated data, including descriptions, synonyms,
+ * images, links, and relations.
+ *
+ * For each piece of data, an "Exclude" button is provided. Clicking this button
+ * sends an AJAX request to `ontology-cleaner-exclude.service.ajax.php` to add
+ * the item to the appropriate exclusion list. This helps refine the ontology by
+ * removing incorrect or undesirable information before the final version is generated.
+ *
+ * The script maintains its state (the index of the current concept being reviewed)
+ * in a file, allowing the cleaning process to be paused and resumed.
+ *
+ * @package QuranAnalysis
+ * @author Karim Ouda
+ */
 #   PLEASE DO NOT REMOVE OR CHANGE THIS COPYRIGHT BLOCK
 #   ====================================================================
 #
@@ -31,7 +50,16 @@ loadModels("core,ontology", "AR");
 
 $LEMMA_TO_SIMPLE_WORD_MAP = loadLemmaToSimpleMappingTable();
 
-
+/**
+ * Displays a piece of data with an "Exclude" button for the ontology cleaner UI.
+ *
+ * @param string      $type       The category of the data (e.g., 'images', 'concepts', 'relations').
+ * @param string      $value      The data value to be displayed and potentially excluded.
+ * @param int         $secIndex   A unique index for the HTML element's ID.
+ * @param string|null $savedValue An alternative value to be passed to the exclude service.
+ *                                If provided, this value is used in the AJAX call instead of `$value`.
+ * @return void
+ */
 function showExcludeFor($type, $value,$secIndex=1,$savedValue=null)
 {
 	

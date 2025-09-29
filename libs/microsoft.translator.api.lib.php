@@ -30,6 +30,14 @@
 $accessToken = null;
 $authHeader = null;
 
+/**
+ * Refreshes the OAuth access token for the Microsoft Translator API.
+ *
+ * NOTE: You must replace "YOUR_ID" and "YOUR_SECRET" with your actual
+ * Microsoft Azure application credentials.
+ *
+ * @return string The authorization header string with the new access token.
+ */
 function refreshAccessToken()
 {
 	
@@ -56,10 +64,21 @@ function refreshAccessToken()
 }
 
 
+/**
+ * Handles the OAuth process to obtain an access token from Microsoft Azure.
+ */
 class AccessTokenAuthentication 
 {
-	/*
-	 * Get the access token. @param string $grantType Grant type. @param string $scopeUrl Application Scope URL. @param string $clientID Application client ID. @param string $clientSecret Application client ID. @param string $authUrl Oauth Url. @return string.
+	/**
+	 * Get the access token.
+	 *
+	 * @param string $grantType    Grant type.
+	 * @param string $scopeUrl     Application Scope URL.
+	 * @param string $clientID     Application client ID.
+	 * @param string $clientSecret Application client secret.
+	 * @param string $authUrl      OAuth URL.
+	 * @return string The access token.
+	 * @throws Exception If there is a cURL error or an error from the OAuth service.
 	 */
 	function getTokens($grantType, $scopeUrl, $clientID, $clientSecret, $authUrl) {
 		try {
@@ -105,12 +124,18 @@ class AccessTokenAuthentication
 		}
 	}
 }
-/*
- * Class:HTTPTranslator Processing the translator request.
+/**
+ * Processes the HTTP requests to the Microsoft Translator API.
  */
 class HTTPTranslator {
-	/*
-	 * Create and execute the HTTP CURL request. @param string $url HTTP Url. @param string $authHeader Authorization Header string. @param string $postData Data to post. @return string.
+	/**
+	 * Create and execute the HTTP cURL request.
+	 *
+	 * @param string $url        HTTP URL.
+	 * @param string $authHeader Authorization Header string.
+	 * @param string $postData   Data to post (optional).
+	 * @return string The response from the cURL request.
+	 * @throws Exception If there is a cURL error.
 	 */
 	function curlRequest($url, $authHeader, $postData = '') {
 		// Initialize the Curl Session.
@@ -144,8 +169,12 @@ class HTTPTranslator {
 		curl_close ( $ch );
 		return $curlResponse;
 	}
-	/*
-	 * Create Request XML Format. @param string $languageCode Language code @return string.
+	/**
+	 * Create Request XML Format.
+	 *
+	 * @param string $languageCode Language code.
+	 * @return string The request XML.
+	 * @throws Exception If the language code is empty.
 	 */
 	function createReqXML($languageCode) {
 		// Create the Request XML.
@@ -160,6 +189,14 @@ class HTTPTranslator {
 	}
 }
 
+/**
+ * Translates a given text using the Microsoft Translator API.
+ *
+ * @param string $text          The text to translate.
+ * @param string $translateFrom The source language code (e.g., "en").
+ * @param string $translateTo   The target language code (e.g., "ar").
+ * @return string|false|null The translated text, false if the input text is empty, or null on API error.
+ */
 function translateText($text,$translateFrom="en",$translateTo="ar")
 {
 	global $authHeader;

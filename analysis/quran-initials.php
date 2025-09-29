@@ -1,4 +1,23 @@
-<?php 
+<?php
+/**
+ * Quranic Initials (Muqatta'at) Analysis Page
+ *
+ * This script generates a page dedicated to the analysis and visualization of the
+ * Quranic Initials (also known as disjoined or disconnected letters).
+ *
+ * It performs the following steps:
+ * 1. Queries the Quranic Arabic Corpus (QAC) model for all words tagged with the
+ *    'INL' (initials) Part-of-Speech tag.
+ * 2. Compiles and displays a frequency table of each unique initial.
+ * 3. Generates a D3.js bar chart to visualize the distribution of these initials
+ *    across the chapters and verses of the Quran.
+ * 4. Creates a word cloud of all other words that co-occur in the same verses
+ *    as the initials.
+ * 5. Lists all verses containing initials, highlighting both the initial itself
+ *    and the word immediately following it for contextual analysis.
+ *
+ * @package QuranAnalysis
+ */
 #   PLEASE DO NOT REMOVE OR CHANGE THIS COPYRIGHT BLOCK
 #   ====================================================================
 #

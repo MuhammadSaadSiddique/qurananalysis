@@ -1,4 +1,34 @@
 <?php
+/**
+ * Common Query Handling and Processing Logic
+ *
+ * This script is a core component of the search functionality and is included by
+ * the main search AJAX services (`index.php` and `dosearch.ajax.service.php`).
+ * It orchestrates the entire lifecycle of a search query, from initial parsing
+ * to the final generation of a scored result set.
+ *
+ * The query processing pipeline includes the following steps:
+ * 1.  **Query Parsing**: Retrieves the raw query and detects the language.
+ * 2.  **Type Detection**: Determines the search type (e.g., phrase, question,
+ *     verse number, concept search, transliteration) and sets corresponding flags.
+ * 3.  **Normalization**: Cleans the query string, converts Uthmani script to
+ *     Simple Arabic, and handles case-folding for English.
+ * 4.  **Query Expansion**: Enriches the query by:
+ *     - Adding morphological derivations (e.g., plural/singular forms).
+ *     - Adding related concepts from the ontology (taxonomic relations).
+ *     - For Arabic, adding roots and stems from the QAC.
+ * 5.  **Execution**: Searches the inverted index using the expanded query terms
+ *     to retrieve and score relevant documents (verses).
+ * 6.  **Question Answering**: If the query is a question, it invokes a specialized
+ *     function to re-rank results and find a direct answer.
+ * 7.  **Result Handling**: Manages cases with no results by generating suggestions,
+ *     and prepares statistics for the final result display.
+ *
+ * This script sets up all the necessary variables that are then used by the
+ * including service to render the final HTML output.
+ *
+ * @package QuranAnalysis
+ */
 #   PLEASE DO NOT REMOVE OR CHANGE THIS COPYRIGHT BLOCK
 #   ====================================================================
 #

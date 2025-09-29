@@ -1,4 +1,21 @@
-<?php 
+<?php
+/**
+ * Iframe for Ontology Graph Visualization
+ *
+ * This script generates a self-contained HTML page designed to be embedded as an iframe.
+ * It renders a D3.js force-directed graph of the ontological concepts found within a
+ * specific chapter (Sura) of the Quran.
+ *
+ * The script expects the following GET parameters:
+ * - `s`: The index of the Sura to be visualized.
+ * - `a`: (Currently unused but intended for a specific verse).
+ * - `allSURA`: (Currently unused).
+ *
+ * It processes the text of the specified Sura, generates a graph object using the
+ * `ontologyTextToD3Graph` function, and then uses D3.js to draw the interactive graph.
+ *
+ * @package QuranAnalysis
+ */
 #   PLEASE DO NOT REMOVE OR CHANGE THIS COPYRIGHT BLOCK
 #   ====================================================================
 #

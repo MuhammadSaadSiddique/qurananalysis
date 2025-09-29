@@ -1,4 +1,19 @@
-<?php 
+<?php
+/**
+ * Pause Marks Analysis Tool Page
+ *
+ * This script renders the user interface for exploring Quranic pause marks.
+ * It provides a dropdown menu containing all the pause marks used in the Quranic text.
+ *
+ * When a user selects a pause mark from the menu, a JavaScript function sends an
+ * AJAX request to the `pausemarks.ajax.service.php` backend. The service finds
+ * all verses containing the selected mark and returns the results, which are then
+ * dynamically displayed on this page.
+ *
+ * The page uses the standard analysis section templates for a consistent layout.
+ *
+ * @package QuranAnalysis
+ */
 #   PLEASE DO NOT REMOVE OR CHANGE THIS COPYRIGHT BLOCK
 #   ====================================================================
 #

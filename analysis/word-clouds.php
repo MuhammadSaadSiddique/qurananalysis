@@ -1,4 +1,22 @@
-<?php 
+<?php
+/**
+ * Word Clouds Analysis Page
+ *
+ * This script renders the user interface for the Word Clouds analysis tool.
+ * It provides a dropdown menu that allows users to select a specific word cloud
+ * to visualize.
+ *
+ * The options include:
+ * - A word cloud for all words that begin verses.
+ * - A word cloud for all words that end verses.
+ * - A separate word cloud for each of the 114 chapters (Suras) of the Quran.
+ *
+ * Upon selection, a JavaScript function sends an AJAX request to the
+ * `word-clouds.ajax.service.php` backend, which generates and returns the
+ * selected word cloud for display on this page.
+ *
+ * @package QuranAnalysis
+ */
 #   PLEASE DO NOT REMOVE OR CHANGE THIS COPYRIGHT BLOCK
 #   ====================================================================
 #

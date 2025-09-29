@@ -1,4 +1,19 @@
-<?php 
+<?php
+/**
+ * Full Ontology Visualization Page
+ *
+ * This script generates a standalone page dedicated to visualizing the entire QA Ontology.
+ * It offers two different presentation modes, selectable by the user:
+ * 1.  **Tree**: A hierarchical, collapsible tree structure that shows the 'is-a' relationships.
+ * 2.  **Force-Directed Graph**: A dynamic graph that visualizes all concepts and their relationships.
+ *
+ * The page accepts 'lang' and 'presentation' as GET parameters to control the display.
+ * It loads the complete ontology model and uses the appropriate graphing function
+ * (`ontologyToD3TreemapHierarchical` or `ontologyToD3Graph`) to prepare the data.
+ * The data is then passed as JSON to the client-side D3.js library for rendering.
+ *
+ * @package QuranAnalysis
+ */
 #   PLEASE DO NOT REMOVE OR CHANGE THIS COPYRIGHT BLOCK
 #   ====================================================================
 #

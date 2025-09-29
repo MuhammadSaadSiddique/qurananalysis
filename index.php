@@ -1,4 +1,23 @@
-<?php 
+<?php
+/**
+ * Main Search Page (Homepage)
+ *
+ * This file serves as the main entry point and user interface for the Quran Analysis search engine.
+ * It is responsible for rendering the complete HTML structure of the homepage, including the
+ * header, search form, and footer.
+ *
+ * The page includes all necessary CSS and JavaScript assets. It handles the initial state
+ * of the application:
+ * - If a search query is provided via the 'q' GET parameter, it automatically populates the
+ *   search box and triggers an AJAX search request to the backend (`/search/index.php`).
+ * - If no query is present, it displays a welcome message and a list of example queries
+ *   to guide the user.
+ *
+ * All dynamic search functionality is managed client-side through JavaScript, which
+ * communicates with the server asynchronously to fetch and display search results.
+ *
+ * @package QuranAnalysis
+ */
 #   PLEASE DO NOT REMOVE OR CHANGE THIS COPYRIGHT BLOCK
 #   ====================================================================
 #

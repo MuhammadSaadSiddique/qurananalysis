@@ -1,4 +1,20 @@
-<?php 
+<?php
+/**
+ * Word Information Tool Page
+ *
+ * This script renders the user interface for the Word Information tool. It provides
+ * a text input field where a user can enter a specific Arabic word from the Quran.
+ *
+ * Upon clicking the "Get Information" button, a JavaScript function sends an AJAX
+ * request to the `wordsinfo.ajax.service.php` backend. The service gathers
+ * comprehensive details about the word—including its frequency, TF-IDF weight,
+ * root, lemma, POS tags, and all verses where it appears—and returns the formatted
+ * information to be displayed on this page.
+ *
+ * The page uses the standard analysis section templates for a consistent layout.
+ *
+ * @package QuranAnalysis
+ */
 #   PLEASE DO NOT REMOVE OR CHANGE THIS COPYRIGHT BLOCK
 #   ====================================================================
 #

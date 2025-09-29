@@ -1,4 +1,27 @@
-<?php 
+<?php
+/**
+ * AJAX Service for Word/POS Concordance Analysis
+ *
+ * This script serves as the backend for the Concordance analysis tool. It is
+ * designed to be called via an AJAX request to find and display all occurrences
+ * of a target word or Part-of-Speech (POS) tag within its surrounding context.
+ *
+ * It expects the following GET parameters:
+ * - `word`: The target word or POS tag to analyze.
+ * - `level`: The number of words/tags to show before and after the target.
+ * - `lang`: The language of the input.
+ *
+ * The script processes the Quranic corpus, finds all instances of the target,
+ * and for each instance, it extracts the specified number of preceding and
+ * succeeding words/tags.
+ *
+ * The final output is a three-column HTML table:
+ * - The left column lists the most frequent phrases found before the target.
+ * - The center column shows all the full concordance lines.
+ * - The right column lists the most frequent phrases found after the target.
+ *
+ * @package QuranAnalysis
+ */
 #   PLEASE DO NOT REMOVE OR CHANGE THIS COPYRIGHT BLOCK
 #   ====================================================================
 #
@@ -57,7 +80,14 @@ $ssPoSAggregation = array();
 $ssPoSAggregationCorrespondingSent = array();
 
 
-
+			/**
+			 * Constructs a phrase string from a multi-level context array.
+			 *
+			 * @param array  $contextArr    The context array, with keys like '+1', '-1', etc.
+			 * @param int    $maxLevel      The maximum number of levels to process.
+			 * @param string $beforeOrAfter Specifies whether to build the phrase from "BEFORE" or "AFTER" contexts.
+			 * @return string The concatenated phrase string.
+			 */
 			function getContextPhrases($contextArr,$maxLevel,$beforeOrAfter="BEFORE")
 			{
 				$phraseStr = "";

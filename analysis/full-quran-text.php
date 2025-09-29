@@ -1,4 +1,17 @@
-<?php 
+<?php
+/**
+ * Full Quran Text Display Page
+ *
+ * This script generates a page that displays the entire text of the Quran in a single,
+ * large table. Each row in the table corresponds to a verse and includes the
+ * general index, chapter index, chapter name, verse number, and the verse text itself.
+ *
+ * It uses the standard analysis section templates for a consistent layout. The page also
+ * contains client-side JavaScript to filter and highlight text within the verses,
+ * although the corresponding search input field is currently commented out in the HTML.
+ *
+ * @package QuranAnalysis
+ */
 #   PLEASE DO NOT REMOVE OR CHANGE THIS COPYRIGHT BLOCK
 #   ====================================================================
 #
