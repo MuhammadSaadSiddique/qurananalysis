@@ -1,3 +1,16 @@
+<?php
+/**
+ * Resources Page Content
+ *
+ * This file contains the HTML content for the "Resources" page. It provides
+ * links to essential project resources, including the source code on GitHub
+ * and the accompanying research thesis.
+ *
+ * It is included by `info/index.php` when the 'page' GET parameter is set to 'resources'.
+ *
+ * @package QuranAnalysis
+ */
+?>
 <!--
 #   PLEASE DO NOT REMOVE OR CHANGE THIS COPYRIGHT BLOCK
 #   ====================================================================

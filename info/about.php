@@ -1,3 +1,13 @@
+<?php
+/**
+ * About Page Content
+ *
+ * This file contains the HTML content for the "About" page. It is included by
+ * `info/index.php` when the 'page' GET parameter is set to 'about'.
+ *
+ * @package QuranAnalysis
+ */
+?>
 <!--
 #   PLEASE DO NOT REMOVE OR CHANGE THIS COPYRIGHT BLOCK
 #   ====================================================================

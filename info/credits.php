@@ -1,3 +1,16 @@
+<?php
+/**
+ * Credits Page Content
+ *
+ * This file contains the HTML content for the "Credits" page. It acknowledges
+ * the base projects and external libraries that were essential for the
+ * development of the QuranAnalysis application.
+ *
+ * It is included by `info/index.php` when the 'page' GET parameter is set to 'credits'.
+ *
+ * @package QuranAnalysis
+ */
+?>
 <!--
 #   PLEASE DO NOT REMOVE OR CHANGE THIS COPYRIGHT BLOCK
 #   ====================================================================
@@ -81,8 +94,3 @@
 		</div>
 		
 </fieldset>
-
-			   	
-	
-
-

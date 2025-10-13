@@ -1,3 +1,14 @@
+<?php
+/**
+ * Contact Page Content
+ *
+ * This file contains the HTML content for the "Contact" page. It provides
+ * contact information and includes social media widgets for Twitter and Facebook.
+ * It is included by `info/index.php` when the 'page' GET parameter is set to 'contact'.
+ *
+ * @package QuranAnalysis
+ */
+?>
 <!--
 #   PLEASE DO NOT REMOVE OR CHANGE THIS COPYRIGHT BLOCK
 #   ====================================================================
