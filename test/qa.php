@@ -1,4 +1,19 @@
-<?php 
+<?php
+/**
+ * Question Answering (QA) System Accuracy Test
+ *
+ * This script provides a simple framework for running a predefined set of test
+ * questions against the Question Answering system to manually evaluate its accuracy.
+ *
+ * It contains a hardcoded list of questions that are sequentially passed to the
+ * `answerQuestion` function. This function, in turn, uses the common query handling
+ * logic to process the question and retrieve an answer. The results are printed
+ * to the screen in a simple format for review.
+ *
+ * This is a developer tool and is not intended for public use.
+ *
+ * @package QuranAnalysis
+ */
 #   PLEASE DO NOT REMOVE OR CHANGE THIS COPYRIGHT BLOCK
 #   ====================================================================
 #
@@ -64,6 +79,15 @@ $query = $_GET['q'];
 			
 				
 			
+					/**
+					 * Executes a single question test case and prints the result.
+					 *
+					 * This function takes a question string, runs it through the search and QA pipeline,
+					 * and then prints the outcome in a simple, pipe-delimited format for manual review.
+					 *
+					 * @param string $testQuery The question to be tested.
+					 * @return void
+					 */
 					function answerQuestion($testQuery)
 					{
 						$isInTestScript = true;

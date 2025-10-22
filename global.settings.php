@@ -1,4 +1,17 @@
-<?php 
+<?php
+/**
+ * Global Settings and Configuration
+ *
+ * This file defines global variables, constants, and configuration settings
+ * used throughout the Quran Analysis application. It includes file paths for
+ * data sources, libraries, and assets, as well as application-level constants
+ * like build version and character encodings.
+ *
+ * It also sets up a development-specific environment with error reporting and
+ * a custom shutdown function to handle fatal errors.
+ *
+ * @package QuranAnalysis
+ */
 #   PLEASE DO NOT REMOVE OR CHANGE THIS COPYRIGHT BLOCK
 #   ====================================================================
 #

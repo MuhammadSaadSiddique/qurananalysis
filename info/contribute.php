@@ -1,3 +1,17 @@
+<?php
+/**
+ * Contribute Page Content
+ *
+ * This file contains the HTML content for the "Contribute" page. It outlines
+ * various ways users can contribute to the project, including sharing on social
+ * media, joining the mailing list, providing feedback, suggesting ideas, and
+ * contributing to the source code on GitHub.
+ *
+ * It is included by `info/index.php` when the 'page' GET parameter is set to 'contribute'.
+ *
+ * @package QuranAnalysis
+ */
+?>
 <!--
 #   PLEASE DO NOT REMOVE OR CHANGE THIS COPYRIGHT BLOCK
 #   ====================================================================

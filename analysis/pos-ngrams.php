@@ -1,4 +1,19 @@
-<?php 
+<?php
+/**
+ * Part-of-Speech (POS) Patterns (N-Grams) Tool Page
+ *
+ * This script renders the user interface for the POS Patterns analysis tool.
+ * It provides a text input field where a user can enter a space-separated sequence
+ * of Part-of-Speech tags (e.g., "PN V" for Proper Noun followed by a Verb).
+ * The wildcard character '*' is also supported.
+ *
+ * Upon clicking the "Find" button, a JavaScript function sends an AJAX request to
+ * the `pos-ngrams.ajax.service.php` backend. The service finds all word sequences
+ * in the Quran that match the specified grammatical pattern and returns the results,
+ * which are then displayed on this page.
+ *
+ * @package QuranAnalysis
+ */
 #   PLEASE DO NOT REMOVE OR CHANGE THIS COPYRIGHT BLOCK
 #   ====================================================================
 #

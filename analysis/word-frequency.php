@@ -1,4 +1,24 @@
-<?php 
+<?php
+/**
+ * Word Frequency and TF-IDF Analysis Page
+ *
+ * This script generates a page that displays detailed frequency and weighting
+ * information for every word in the Quranic corpus. The data is presented in a
+ * sortable table with the following columns:
+ *
+ * - **Rank**: The rank of the word by frequency.
+ * - **Word**: The word itself.
+ * - **Term Frequency (TF)**: The total number of times the word appears in the corpus.
+ * - **TF Percentage**: The percentage of the word's frequency relative to all words.
+ * - **Document Frequency (DF)**: The number of chapters (documents) the word appears in.
+ * - **Inverse Document Frequency (IDF)**: The IDF score for the word.
+ * - **TF-IDF Weight**: The final TF-IDF score for the word.
+ *
+ * The page includes a toggle button to include or exclude stopwords from the list,
+ * allowing for different levels of analysis.
+ *
+ * @package QuranAnalysis
+ */
 #   PLEASE DO NOT REMOVE OR CHANGE THIS COPYRIGHT BLOCK
 #   ====================================================================
 #

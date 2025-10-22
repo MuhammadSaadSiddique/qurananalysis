@@ -1,4 +1,19 @@
-<?php 
+<?php
+/**
+ * Word Similarity Analysis Tool Page
+ *
+ * This script renders the user interface for the Word Similarity tool. It provides a
+ * simple text input field where a user can enter an Arabic or English word.
+ *
+ * When the "Find" button is clicked, a JavaScript function sends an AJAX request to the
+ * `simmilar-words.ajax.service.php` backend. The service identifies words in the
+ * Quranic corpus that have a similar character structure to the input word and
+ * returns a list of the top 20 matches, which are then displayed on this page.
+ *
+ * The page uses the standard analysis section templates for a consistent layout.
+ *
+ * @package QuranAnalysis
+ */
 #   PLEASE DO NOT REMOVE OR CHANGE THIS COPYRIGHT BLOCK
 #   ====================================================================
 #

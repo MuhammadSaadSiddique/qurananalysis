@@ -1,4 +1,17 @@
-<?php 
+<?php
+/**
+ * AJAX Service for N-Gram Generation
+ *
+ * This script serves as an AJAX endpoint for the N-Grams analysis tool. It receives
+ * the desired 'n' value (as 'parameter') and a language via a GET request.
+ *
+ * The script calls the `getNGrams()` function to process the entire Quranic corpus
+ * and extract all n-grams of the specified length along with their frequencies.
+ * The results are then formatted into an HTML table, including a header with
+ * summary statistics, and returned to the client to be displayed on the page.
+ *
+ * @package QuranAnalysis
+ */
 #   PLEASE DO NOT REMOVE OR CHANGE THIS COPYRIGHT BLOCK
 #   ====================================================================
 #

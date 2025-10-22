@@ -1,4 +1,23 @@
-<?php 
+<?php
+/**
+ * Exploratory Search Page
+ *
+ * This script generates a highly interactive, visual interface for exploring the
+ * concepts within the Quranic ontology. It presents the ontology as a D3.js
+ * clustered bubble chart, where each bubble is a concept and clusters represent
+ * broader topics.
+ *
+ * The script first loads the ontology and processes it into a hierarchical tree.
+ * The local `addChildrenToCluster` function then traverses this tree to group
+ * related concepts into clusters suitable for the visualization. The size of each
+ * concept's bubble is determined by its frequency in the corpus.
+ *
+ * On the client side, D3.js renders the force-directed graph. Users can click on
+ * any concept bubble to trigger an AJAX search for that concept, with the results
+ * appearing in a dynamic overlay.
+ *
+ * @package QuranAnalysis
+ */
 #   PLEASE DO NOT REMOVE OR CHANGE THIS COPYRIGHT BLOCK
 #   ====================================================================
 #
@@ -149,7 +168,18 @@ $handledBefore = array();
 //preprint_r($treeRootNodeObj);exit;
 
 
-
+/**
+ * Recursively traverses a hierarchical tree of concepts and flattens it into a
+ * list of nodes suitable for a D3.js clustered bubble chart.
+ *
+ * @param array &$clusteredArr         The flat array of nodes to be populated, passed by reference.
+ * @param array $parentNodeArr         The current parent node in the tree whose children are being processed.
+ * @param int   &$clusterSerialNumber  The current cluster ID, passed by reference.
+ * @param int   &$nodeSerialNumber     The current node ID, passed by reference.
+ * @param int   $level                 The current depth in the recursion.
+ * @param array &$handledBefore        An array to track processed nodes to prevent duplicates, passed by reference.
+ * @return void
+ */
 function addChildrenToCluster(&$clusteredArr,$parentNodeArr,&$clusterSerialNumber,&$nodeSerialNumber,$level,&$handledBefore)
 {
 

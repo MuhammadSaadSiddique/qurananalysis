@@ -1,4 +1,23 @@
-<?php 
+<?php
+/**
+ * AJAX Service for Generating Word Clouds
+ *
+ * This script serves as the backend for the Word Clouds analysis tool. It is called
+ * via an AJAX request to generate the HTML and JavaScript required to render a
+ * specific word cloud.
+ *
+ * It expects the following GET parameter:
+ * - `cloudToShow`: A string indicating which cloud to generate. This can be:
+ *   - 'VB': For a cloud of words that begin verses.
+ *   - 'VE': For a cloud of words that end verses.
+ *   - A numeric index (0-113): For a cloud of words from a specific chapter (Sura).
+ *
+ * The script retrieves the appropriate pre-computed word frequency data from the
+ * core model, generates the HTML `<a>` tags for the cloud items, and includes the
+ * necessary JavaScript to initialize the `tagcloud` jQuery plugin on the client side.
+ *
+ * @package QuranAnalysis
+ */
 #   PLEASE DO NOT REMOVE OR CHANGE THIS COPYRIGHT BLOCK
 #   ====================================================================
 #

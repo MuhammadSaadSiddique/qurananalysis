@@ -1,4 +1,18 @@
-<?php 
+<?php
+/**
+ * Repeated Verses Analysis Page
+ *
+ * This script generates a page that displays all verses that are repeated
+ * verbatim elsewhere in the Quran.
+ *
+ * It calls the `getRepeatedVerses()` function, which scans the entire Quranic
+ * text to find identical verses and count their frequencies. The results are then
+ * presented in an HTML table, sorted in descending order of frequency.
+ *
+ * The page uses the standard analysis section templates for a consistent layout.
+ *
+ * @package QuranAnalysis
+ */
 #   PLEASE DO NOT REMOVE OR CHANGE THIS COPYRIGHT BLOCK
 #   ====================================================================
 #

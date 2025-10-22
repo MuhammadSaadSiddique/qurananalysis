@@ -1,3 +1,20 @@
+<?php
+/**
+ * Feedback Page Content
+ *
+ * This file contains the HTML content for the "Feedback" page. It provides a
+ * form for users to submit feedback, bug reports, or ideas.
+ *
+ * The form includes fields for name, email, feedback type (radio buttons), and
+ * the message text. The submission is handled by the `submitFeedback()` JavaScript
+ * function, which sends the data via an AJAX request to the
+ * `/services/doSubmitFeedback.php` endpoint.
+ *
+ * It is included by `info/index.php` when the 'page' GET parameter is set to 'feedback'.
+ *
+ * @package QuranAnalysis
+ */
+?>
 <!--
 #   PLEASE DO NOT REMOVE OR CHANGE THIS COPYRIGHT BLOCK
 #   ====================================================================
@@ -59,4 +76,3 @@
 	<h1 class='info-page-section-title'>Public Feedback</h1> 
 	<br>
 <div class="fb-comments" data-href="http://qurananalysis.com/info/index.php?page=feedback" data-numposts="5"></div>
-	

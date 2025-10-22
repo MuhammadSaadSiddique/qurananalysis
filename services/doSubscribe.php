@@ -1,4 +1,23 @@
 <?php
+/**
+ * Mailing List Subscription Service
+ *
+ * This script handles new user subscriptions to the mailing list. It is designed
+ * to be called via an AJAX POST request from the subscription form.
+ *
+ * It expects the following POST parameters:
+ * - `name`: The subscriber's name.
+ * - `email`: The subscriber's email address.
+ * - `title`: The subscriber's title/occupation.
+ * - `entity`: The subscriber's organization or entity.
+ *
+ * The script inserts the new subscriber's information into the `EmailList` table
+ * in the SQLite database and then includes `sendEmail.inc.php` to send an email
+ * notification about the new subscription. It returns "DONE" on success or an
+ * error message on failure.
+ *
+ * @package QuranAnalysis
+ */
 #   PLEASE DO NOT REMOVE OR CHANGE THIS COPYRIGHT BLOCK
 #   ====================================================================
 #

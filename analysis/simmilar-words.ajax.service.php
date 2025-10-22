@@ -1,4 +1,21 @@
-<?php 
+<?php
+/**
+ * AJAX Service for Finding Similar Words
+ *
+ * This script serves as an AJAX endpoint for the Word Similarity analysis tool.
+ * It is designed to find words in the Quranic corpus that are orthographically
+ * similar (based on character-level similarity, not semantics) to a given input word.
+ *
+ * The script expects the following GET parameters:
+ * - `word`: The word to find similar matches for.
+ * - `lang`: (Optional) The language of the word. If not provided, it is
+ *   auto-detected.
+ *
+ * It calls the `getSimilarWords()` function to perform the analysis and returns
+ * the top 20 results formatted as an HTML list.
+ *
+ * @package QuranAnalysis
+ */
 #   PLEASE DO NOT REMOVE OR CHANGE THIS COPYRIGHT BLOCK
 #   ====================================================================
 #

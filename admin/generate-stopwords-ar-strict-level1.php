@@ -1,4 +1,22 @@
-<?php 
+<?php
+/**
+ * Strict Arabic Stopwords Generator (Level 1)
+ *
+ * This script generates a strict, level-1 list of Arabic stopwords tailored for the
+ * Quranic corpus. It starts with a generic, merged list of Arabic stopwords and
+ * filters it based on two main criteria:
+ * 1. The word must exist within the Quranic text.
+ * 2. The word's Part-of-Speech (POS) tags must not indicate that it is solely a
+ *    content-bearing word (like a noun, proper noun, or adjective). This helps
+ *    to retain words that might be stopwords in general Arabic but have a
+ *    significant meaning in the Quranic context.
+ *
+ * The final list of stopwords is written to `data/quran-stop-words.strict.l1.ar`.
+ * This is a developer tool for data generation and is not part of the main application runtime.
+ *
+ * @package QuranAnalysis
+ * @author Karim Ouda
+ */
 #   PLEASE DO NOT REMOVE OR CHANGE THIS COPYRIGHT BLOCK
 #   ====================================================================
 #

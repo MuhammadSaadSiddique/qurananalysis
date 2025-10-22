@@ -1,4 +1,18 @@
 <?php
+/**
+ * AJAX Service for Ontology Cleaner Exclusions
+ *
+ * This script serves as an AJAX endpoint for the ontology cleaning interface.
+ * It receives a 'type' (e.g., 'concepts', 'relations') and a 'value'
+ * via GET parameters and appends the value to the corresponding exclusion file
+ * located in `data/ontology/extraction/cleaner/`.
+ *
+ * This allows for the dynamic addition of items to the exclusion lists directly
+ * from the cleaning tool's user interface.
+ *
+ * @package QuranAnalysis
+ * @author Karim Ouda
+ */
 #   PLEASE DO NOT REMOVE OR CHANGE THIS COPYRIGHT BLOCK
 #   ====================================================================
 #

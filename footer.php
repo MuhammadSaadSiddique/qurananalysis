@@ -1,4 +1,14 @@
 <?php
+/**
+ * Footer Section Template
+ *
+ * This file contains the HTML and PHP code for the website's footer.
+ * It includes social media sharing buttons for Twitter and Facebook,
+ * and a conditional block to display memory usage for debugging in
+ * a development environment.
+ *
+ * @package QuranAnalysis
+ */
 #   PLEASE DO NOT REMOVE OR CHANGE THIS COPYRIGHT BLOCK
 #   ====================================================================
 #

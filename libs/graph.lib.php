@@ -26,19 +26,52 @@
 require_once(dirname(__FILE__)."/../global.settings.php");
 require_once(dirname(__FILE__)."/core.lib.php");
 
+/**
+ * Converts a concept ID into a human-readable graph label.
+ *
+ * Replaces underscores with spaces and capitalizes the first letter.
+ *
+ * @param string $conceptID The concept ID (e.g., "divine_being").
+ * @return string The formatted graph label (e.g., "Divine being").
+ */
 function convertConceptIDtoGraphLabel($conceptID)
 {
 	return ucfirst(str_replace("_", " ", $conceptID));;
 }
+
+/**
+ * Converts a word or phrase into a concept ID format.
+ *
+ * Replaces spaces with underscores.
+ *
+ * @param string $word The word or phrase.
+ * @return string The concept ID formatted string.
+ */
 function convertWordToConceptID($word)
 {
 	return (str_replace(" ", "_", $word));;
 }
 
+/**
+ * Formats an English concept string for display.
+ *
+ * Removes basic English stopwords (except for negation) and capitalizes the first letter.
+ *
+ * @param string $conceptEN The English concept string.
+ * @return string The formatted English concept.
+ */
 function formatEnglishConcept($conceptEN)
 {
 	return ucfirst(removeBasicEnglishStopwordsNoNegation($conceptEN));
 }
+/**
+ * Converts an array of text strings into a graph object for D3 visualization.
+ *
+ * @param array $searchResultTextArr An array of strings to process.
+ * @param array $excludes            An associative array of words to exclude.
+ * @param int   $capping             The maximum number of nodes to include in the graph.
+ * @return array An associative array representing the graph object with 'nodes', 'links', and a 'capped' status.
+ */
 function textToGraph($searchResultTextArr,$excludes,$capping=300)
 {
 	global $pauseMarksFile, $lang;
@@ -121,6 +154,18 @@ function textToGraph($searchResultTextArr,$excludes,$capping=300)
 	return $graphObj;
 }
 
+/**
+ * Creates a new concept node object for the D3 graph.
+ *
+ * @param int    &$nodeSerialNumber  The serial number for the node, passed by reference.
+ * @param string $lang               The language ('EN' or 'AR').
+ * @param string $finalNodeLabel     The display label for the node.
+ * @param array  $ontologyConceptArr An array containing the ontology concept's details.
+ * @param int    $randomXLocation    The initial X coordinate for the node.
+ * @param int    $randomYLocation    The initial Y coordinate for the node.
+ * @param int    $nodeLevel          The level of the node in the graph hierarchy.
+ * @return array The newly created concept node object.
+ */
 function createNewConceptObj(&$nodeSerialNumber,$lang,$finalNodeLabel,$ontologyConceptArr,$randomXLocation,$randomYLocation,$nodeLevel)
 {
 	
@@ -177,6 +222,25 @@ function createNewConceptObj(&$nodeSerialNumber,$lang,$finalNodeLabel,$ontologyC
 			"x"=>$randomXLocation,"y"=>$randomYLocation);
 }
 
+/**
+ * Generates a D3.js compatible graph object from ontology data based on input text.
+ *
+ * This function takes search results or query terms, identifies corresponding concepts in the ontology,
+ * and builds a graph of these concepts and their relationships. It handles both single terms and phrases,
+ * and can expand the graph to include related concepts.
+ *
+ * @param array  $MODEL_QA_ONTOLOGY      The main ontology data model.
+ * @param string $inputType              The type of input ('SEARCH_RESULTS_TEXT_ARRAY' or 'QUERY_TERMS').
+ * @param array  $searchResultTextArr    The array of text or query terms.
+ * @param int    $minFreq                The minimum frequency for a concept to be included.
+ * @param array  $widthHeigthArr         An array containing the width and height of the graph canvas.
+ * @param string $lang                   The language ('EN' or 'AR').
+ * @param bool   $mainConceptsOnly       Flag to include only the main concepts found in the text.
+ * @param bool   $isPhraseSearch         Flag to indicate if the search is for a whole phrase.
+ * @param bool   $isQuestion             Flag to indicate if the input is a question.
+ * @param string $query                  The original query string, used if $isPhraseSearch is true.
+ * @return array The D3.js graph object with 'nodes' and 'links'.
+ */
 function ontologyTextToD3Graph($MODEL_QA_ONTOLOGY,$inputType,$searchResultTextArr,$minFreq=0,$widthHeigthArr,$lang,$mainConceptsOnly=false,$isPhraseSearch=false,$isQuestion=false,$query="")
 {
 	
@@ -556,6 +620,13 @@ function ontologyTextToD3Graph($MODEL_QA_ONTOLOGY,$inputType,$searchResultTextAr
 
 
 
+/**
+ * Converts the entire ontology into a D3.js force-directed graph object.
+ *
+ * @param array $MODEL_QA_ONTOLOGY The main ontology data model.
+ * @param int   $minFreq           The minimum frequency for a concept to be included.
+ * @return array The D3.js graph object with 'nodes' and 'links'.
+ */
 function ontologyToD3Graph($MODEL_QA_ONTOLOGY,$minFreq=0)
 {
 	global $lang;
@@ -672,6 +743,13 @@ function ontologyToD3Graph($MODEL_QA_ONTOLOGY,$minFreq=0)
 
 
 
+/**
+ * Converts the ontology into a flat D3.js treemap structure.
+ *
+ * @param array $MODEL_QA_ONTOLOGY The main ontology data model.
+ * @param int   $minFreq           The minimum frequency for a concept to be included.
+ * @return array The D3.js treemap object.
+ */
 function ontologyToD3TreemapFlat($MODEL_QA_ONTOLOGY,$minFreq=0)
 {
 	global $lang;
@@ -758,6 +836,17 @@ function ontologyToD3TreemapFlat($MODEL_QA_ONTOLOGY,$minFreq=0)
 }
 
 
+/**
+ * Recursively gets the children of a tree node for the hierarchical treemap.
+ *
+ * @param array  $MODEL_QA_ONTOLOGY The main ontology data model.
+ * @param string $conceptNameID     The concept ID of the parent node.
+ * @param int    $minFreq           The minimum frequency for a concept to be included.
+ * @param string $lang              The language ('EN' or 'AR').
+ * @param int    $level             The current depth level in the recursion.
+ * @param array  $alreadyInLevel1   An array to track concepts already at level 1 to avoid circular recursion.
+ * @return array An array of child node objects.
+ */
 function getTreeNodeChildren($MODEL_QA_ONTOLOGY,$conceptNameID,$minFreq,$lang,$level,$alreadyInLevel1)
 {
 	global $thing_class_name_ar,$is_a_relation_name_ar;
@@ -839,6 +928,15 @@ function getTreeNodeChildren($MODEL_QA_ONTOLOGY,$conceptNameID,$minFreq,$lang,$l
 	
 	return $childrenArr;
 }
+
+/**
+ * Converts the ontology into a hierarchical D3.js treemap structure.
+ *
+ * @param array  $MODEL_QA_ONTOLOGY The main ontology data model.
+ * @param int    $minFreq           The minimum frequency for a concept to be included.
+ * @param string $lang              The language ('EN' or 'AR').
+ * @return array The D3.js treemap object.
+ */
 function ontologyToD3TreemapHierarchical($MODEL_QA_ONTOLOGY,$minFreq=0,$lang)
 {
 	global $lang;

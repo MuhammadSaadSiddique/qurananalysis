@@ -1,4 +1,23 @@
-<?php 
+<?php
+/**
+ * Repeated Phrases (Common Substrings) Analysis Page
+ *
+ * This script identifies and displays repeated phrases (common substrings) found
+ * throughout the Quranic text. It operates in one of two modes:
+ *
+ * 1.  **Cache Loading (Default):** It loads a pre-computed list of common substrings
+ *     and their frequencies from a serialized cache file. This is the standard,
+ *     fast method for displaying the data.
+ * 2.  **Live Generation:** If the cache is disabled (`$LOAD_FROM_CACHE = false`),
+ *     the script performs an intensive on-the-fly analysis. It uses a modified
+ *     Longest Common Substring (LCS) algorithm to compare every verse against
+ *     every other verse, identifies all common phrases, counts their frequencies,
+ *     and then saves the result to the cache file for future requests.
+ *
+ * The final output is an HTML table listing the repeated phrases sorted by frequency.
+ *
+ * @package QuranAnalysis
+ */
 #   PLEASE DO NOT REMOVE OR CHANGE THIS COPYRIGHT BLOCK
 #   ====================================================================
 #

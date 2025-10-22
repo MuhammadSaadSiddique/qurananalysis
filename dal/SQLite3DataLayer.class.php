@@ -1,4 +1,13 @@
 <?php
+/**
+ * SQLite3 Data Access Layer
+ *
+ * This file provides a simple data access layer (DAL) for interacting with an
+ * SQLite3 database. It encapsulates database connection, querying, and error
+ * handling logic into a reusable class.
+ *
+ * @package QuranAnalysis
+ */
 #   PLEASE DO NOT REMOVE OR CHANGE THIS COPYRIGHT BLOCK
 #   ====================================================================
 #
@@ -37,17 +46,34 @@ define("FEEDBACK_TABLE",
 "(feedbackId INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT,email TEXT, type TEXT, feedback_text TEXT, UNIQUE(email,feedback_text)  )");
 
 
-
-class SQLite3DataLayer 
+/**
+ * A class to handle interactions with an SQLite3 database.
+ */
+class SQLite3DataLayer
 {
+	/**
+	 * @var SQLite3 The database connection object.
+	 */
 	public $databaseConn = null;
 	
-	public function isConnected() 
+	/**
+	 * Checks if the database connection is active.
+	 *
+	 * @return bool True if connected, false otherwise.
+	 */
+	public function isConnected()
 	{
 		return ($this->databaseConn != null);
 	}
 	
-	public function openDB($dbPath, $mode = "ro") 
+	/**
+	 * Opens a connection to the SQLite database.
+	 *
+	 * @param string $dbPath The path to the SQLite database file.
+	 * @param string $mode   The mode to open the database in ('ro' for read-only, 'rw' for read-write).
+	 * @return SQLite3|null The database connection object on success, or null on failure.
+	 */
+	public function openDB($dbPath, $mode = "ro")
 	{
 		if ($this->databaseConn == null) {
 			
@@ -86,7 +112,15 @@ class SQLite3DataLayer
 		return $this->databaseConn;
 	}
 	
-	public function queryDB($sql, $params = null) 
+	/**
+	 * Executes a query that returns multiple rows.
+	 *
+	 * @param string $sql    The SQL query to execute.
+	 * @param array|null $params (Not implemented) Parameters for prepared statements.
+	 * @return SQLite3Result|null The result set object on success, or null on failure.
+	 * @throws Exception If the SQL query is empty.
+	 */
+	public function queryDB($sql, $params = null)
 	{
 		if (empty ( $sql )) {
 			throw new Exception ( "Empty Query" );
@@ -123,6 +157,13 @@ class SQLite3DataLayer
 		return $results;
 	}
 	
+	/**
+	 * Executes a query that returns a single value from the first row.
+	 *
+	 * @param string $sql The SQL query to execute.
+	 * @return mixed|null The result value on success, or null on failure.
+	 * @throws Exception If the SQL query is empty.
+	 */
 	public function queryDBSingle($sql)
 	{
 		if (empty ( $sql )) 
@@ -147,7 +188,14 @@ class SQLite3DataLayer
 		}
 	}
 	
-	public function execOnewayQuery($sql) 
+	/**
+	 * Executes a one-way query that does not return a result set (e.g., INSERT, UPDATE, DELETE).
+	 *
+	 * @param string $sql The SQL query to execute.
+	 * @return bool|null True on success, false on failure, or null if not connected.
+	 * @throws Exception If the SQL query is empty.
+	 */
+	public function execOnewayQuery($sql)
 	{
 		if (empty ( $sql ))
 		{
@@ -168,7 +216,14 @@ class SQLite3DataLayer
 		
 		return $execRes;
 	}
-	public function doesTableExist($tableName) 
+
+	/**
+	 * Checks if a table exists in the database.
+	 *
+	 * @param string $tableName The name of the table to check.
+	 * @return bool True if the table exists, false otherwise.
+	 */
+	public function doesTableExist($tableName)
 	{
 		if ($tableName == null) 
 		{
@@ -186,7 +241,15 @@ class SQLite3DataLayer
 			return true;
 		}
 	}
-	public function onErrorShowDebugformation($execRes, $sql) 
+
+	/**
+	 * Displays debug information on query failure if in a development environment.
+	 *
+	 * @param bool   $execRes The result of the query execution.
+	 * @param string $sql     The SQL query that was executed.
+	 * @return void
+	 */
+	public function onErrorShowDebugformation($execRes, $sql)
 	{
 		global $report;
 		
@@ -206,6 +269,11 @@ class SQLite3DataLayer
 		}
 	}
 	
+	/**
+	 * Gets the row ID of the last inserted row.
+	 *
+	 * @return int|null The last insert row ID, or null if not connected.
+	 */
 	public function getLastInsertId()
 	{
 		if ($this->databaseConn)
@@ -217,6 +285,12 @@ class SQLite3DataLayer
 			return null;
 		}
 	}
+
+	/**
+	 * Closes the database connection.
+	 *
+	 * @return void
+	 */
 	public function closeDBConnection()
 	{
 	
@@ -228,6 +302,9 @@ class SQLite3DataLayer
 		
 	}
 	
+	/**
+	 * Class destructor. Ensures the database connection is released.
+	 */
 	public function __destruct() {
 		if (isset ( $this->databaseConn ) && $this->databaseConn != null) {
 			// function not found
@@ -235,7 +312,12 @@ class SQLite3DataLayer
 		}
 	}
 	
-	public function lastErrorCode() 
+	/**
+	 * Gets the last error code from the database connection.
+	 *
+	 * @return int|null The error code, or null if not connected.
+	 */
+	public function lastErrorCode()
 	{
 		if (isset ( $this->databaseConn ) && $this->databaseConn != null) 
 		{

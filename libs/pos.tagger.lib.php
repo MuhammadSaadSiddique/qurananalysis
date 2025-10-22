@@ -23,8 +23,18 @@
 #    back to www.qurananalysis.com and sufficient credits are given.
 #
 #  ====================================================================
-/*
- * CODE SOURCE:http://phpir.com/part-of-speech-tagging/
+/**
+ * CODE SOURCE: http://phpir.com/part-of-speech-tagging/
+ * This library provides Part-of-Speech (POS) tagging for English text.
+ * It uses a lexicon-based approach with a set of rules to improve accuracy.
+ * Caching has been added by Karim Ouda to improve performance.
+ */
+
+/**
+ * Retrieves the Part-of-Speech (POS) tag for a given token from the lexicon stored in memory.
+ *
+ * @param string $token The word (token) to look up.
+ * @return string The POS tag for the token.
  */
 function getLexiconItemFromMemory($token)
 {
@@ -34,9 +44,18 @@ function getLexiconItemFromMemory($token)
 	 
 	return $entry[0];
 }
+
+/**
+ * A Part-of-Speech (POS) Tagger for English text.
+ */
 class PosTagger {
         private $dict; 
         
+        /**
+         * Constructs the PosTagger object and loads the lexicon into memory if not already cached.
+         *
+         * @param string $lexicon The file path to the lexicon file.
+         */
         public function __construct($lexicon) {
         	
         		// caching added by KARIM
@@ -61,6 +80,12 @@ class PosTagger {
         
      
         
+        /**
+         * Tags the given text with Part-of-Speech information.
+         *
+         * @param string $text The text to be tagged.
+         * @return array An array of tokens, each with its associated POS tag.
+         */
         public function tag($text) {
         		//KARIM: added '-_
                 preg_match_all("/[\w\d\.'\-_]+/", $text, $matches);
@@ -152,6 +177,12 @@ class PosTagger {
         }
 }
 
+/**
+ * Prints the tagged tokens in a "token/tag" format for debugging.
+ *
+ * @param array $tags An array of tagged tokens, where each element has 'token' and 'tag' keys.
+ * @return void
+ */
 function printTag($tags) {
 	foreach($tags as $t) {
 		echo $t['token'] . "/" . $t['tag'] .  " ";
@@ -160,7 +191,12 @@ function printTag($tags) {
 }
 
 
-
+/**
+ * A convenience function to instantiate the PosTagger and tag the given text.
+ *
+ * @param string $text The text to be tagged.
+ * @return array An array of tokens, each with its associated POS tag.
+ */
 function posTagText($text)
 {
 	$tagger = new PosTagger(dirname(__FILE__).'/../data/postagging-corpus/lexicon.txt');

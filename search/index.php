@@ -1,4 +1,27 @@
-<?php 
+<?php
+/**
+ * Main Search Results AJAX Service
+ *
+ * This script is the primary backend endpoint for processing search queries and
+ * generating the complete HTML for the results page. It is called via an AJAX
+ * request from the main `index.php` file.
+ *
+ * The script orchestrates the entire search and result generation process:
+ * 1.  It includes `query.handling.common.php` to parse the query, perform
+ *     query expansion, and retrieve a scored list of relevant documents (verses).
+ * 2.  It renders the search result options (e.g., sorting).
+ * 3.  If the query was a question, it displays a dedicated answer panel.
+ * 4.  It includes `search.result.statement.inc.php` to show a summary of the results.
+ * 5.  It calls `printResultVerses()` to render the list of matching verses.
+ * 6.  It generates data for and renders three visualizations:
+ *     - An ontology graph of concepts related to the query.
+ *     - A word cloud of significant terms from the results.
+ *     - A bar chart showing the distribution of results across chapters.
+ *
+ * The entire output is returned as a single HTML block to the client-side AJAX call.
+ *
+ * @package QuranAnalysis
+ */
 #   PLEASE DO NOT REMOVE OR CHANGE THIS COPYRIGHT BLOCK
 #   ====================================================================
 #

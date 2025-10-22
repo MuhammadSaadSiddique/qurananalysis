@@ -25,6 +25,13 @@
 #  ====================================================================
 
 	
+	/**
+	 * Pretty-prints an array in a readable format.
+	 *
+	 * @param array $arr The array to print.
+	 * @param bool  $absPos Whether to use absolute positioning for the output.
+	 * @return void
+	 */
 	function preprint_r($arr,$absPos=false)
 	{
 		if ( $absPos)
@@ -38,16 +45,33 @@
 	}
 	
 	
+	/**
+	 * Echoes a string followed by a newline and a <br> tag.
+	 *
+	 * @param string $str The string to echo.
+	 * @return void
+	 */
 	function echoN($str)
 	{
 		echo($str."\n<br>");
 	}
 	
+	/**
+	 * Prints the basic HTML page header for a print page.
+	 *
+	 * @return void
+	 */
 	function printHTMLPageHeader()
 	{
 		echo("<html lang='en-US'><head><title>Print Page</title><meta charset='utf-8'></head><body>");
 	}
 	
+	/**
+	 * Converts a multibyte string to an array of ordinal values.
+	 *
+	 * @param string $str The multibyte string.
+	 * @return int[] An array of ordinal values.
+	 */
 	function multibyteStringOrdinal($str)
 	{
 	
@@ -69,6 +93,12 @@
 		return $ordinals;
 	}
 		
+	/**
+	 * Gets the ordinal value of the first character in a multibyte string.
+	 *
+	 * @param string $str The multibyte string.
+	 * @return int The ordinal value of the first character.
+	 */
 	function multibyteCharOrdinal($str)
 	{       
 
@@ -83,6 +113,14 @@
 	    return $charDecValArr[1];
 	}
 	
+	/**
+	 * Displays hidden characters in a string for debugging purposes.
+	 *
+	 * @param string $text The input string.
+	 * @param string $lang The language of the string ('AR' for Arabic, otherwise treated as single-byte).
+	 * @param bool   $exit Whether to terminate the script after execution.
+	 * @return void
+	 */
 	function showHiddenChars($text,$lang="AR",$exit=true)
 	{
 		 
@@ -108,6 +146,12 @@
 				
 	}
 	
+	/**
+	 * Adds commas to a number string for formatting.
+	 *
+	 * @param string $numStr The number string.
+	 * @return string The formatted number string with commas.
+	 */
 	function addCommasToNumber($numStr)
 	{
 		$negativeFlag=false;
@@ -146,6 +190,13 @@
 	}
 	
 
+	/**
+	 * Sorts an array of associative arrays by a specified field in reverse order.
+	 *
+	 * @param array  &$arrayToSort The array to sort.
+	 * @param string $field The field to sort by.
+	 * @return void
+	 */
 	function rsortBy(&$arrayToSort, $field)
 	{
 		
@@ -174,6 +225,15 @@
 	
 	
 	
+	/**
+	 * Logs a search query to a file.
+	 *
+	 * @param string $lang The language of the query.
+	 * @param string $query The search query.
+	 * @param string $searchType The type of search performed.
+	 * @param int    $resultCount The number of results found.
+	 * @return void
+	 */
 	function logQuery($lang,$query,$searchType,$resultCount)
 	{
 		
@@ -187,6 +247,12 @@
 	
 
 
+	/**
+	 * Shuffles an associative array while maintaining key-value pairs.
+	 *
+	 * @param array &$arr The array to shuffle.
+	 * @return void
+	 */
 	function shuffle_assoc(&$arr)
 	{
 		$keys = array_keys($arr);
@@ -201,6 +267,12 @@
 		$arr = $shuffled_array;
 	}
 	
+	/**
+	 * Removes Arabic diacritics (Tashkeel) from a string.
+	 *
+	 * @param string $str The input string.
+	 * @return string The string without diacritics.
+	 */
 	function removeTashkeel($str)
 	{
 		return preg_replace("/[\x{0618}-\x{061A}\x{064B}-\x{0654}\x{0670}\x{06DC}\x{06DF}\x{06E0}\x{06E2}\x{06E3}\x{06E5}\x{06E6}\x{06E8}\x{06EA}-\x{06ED}]/um","",$str);
@@ -243,11 +315,13 @@
 		 */
 	}
 	
-	/*
-	 * Shallow non-exhaustive conversion from uthmani ito simple
-	 * Shoud ONLY be used for non quranic words, for words in the quran use UTHMANI_TO_SIMPLE_WORD_MAP table
-	 * 
-	 * One of the uses to to group uthmani words such as lemmas
+	/**
+	 * Performs a shallow, non-exhaustive conversion from Uthmani script to simple Arabic script.
+	 * This should ONLY be used for non-Quranic words. For Quranic words, use the UTHMANI_TO_SIMPLE_WORD_MAP table.
+	 * One of its uses is to group Uthmani words such as lemmas.
+	 *
+	 * @param string $str The Uthmani script string.
+	 * @return string The converted simple script string.
 	 */
 	function shallowUthmaniToSimpleConversion($str)
 	{
@@ -313,12 +387,24 @@
 		*/
 	}
 	
+	/**
+	 * Strips the Byte Order Mark (BOM) from a string.
+	 *
+	 * @param string $str The input string.
+	 * @return string The string without the BOM.
+	 */
 	function stripBOM($str)
 	{
 		$BOM =  chr(239) . chr(187) . chr(191);
 		return trim(($str),$BOM);
 	}
 	
+	/**
+	 * Cleans and trims a string by removing whitespace and a specific set of special characters.
+	 *
+	 * @param string $str The input string.
+	 * @return string The cleaned and trimmed string.
+	 */
 	function cleanAndTrim($str)
 	{
 		//« spoils arabic words = 0xab
@@ -327,6 +413,12 @@
 	}
 
 	
+	/**
+	 * Checks if a string contains Arabic characters.
+	 *
+	 * @param string $str The input string.
+	 * @return bool True if the string contains Arabic characters, false otherwise.
+	 */
 	function isArabicString($str)
 	{
 			
@@ -350,7 +442,13 @@
 	
 
 	
-	/** My own implementation of Levenstein algorithm since the official one is not multilingual**/
+	/**
+	 * A custom implementation of the Levenshtein distance algorithm that supports multibyte strings.
+	 *
+	 * @param string $word1 The first word.
+	 * @param string $word2 The second word.
+	 * @return int The Levenshtein distance between the two words.
+	 */
 	function myLevensteinEditDistance($word1,$word2)
 	{
 		$word1Length  = mb_strlen($word1);
@@ -395,6 +493,13 @@
 		
 	}
 	
+	/**
+	 * Calculates the Hamming distance between two strings of equal length.
+	 *
+	 * @param string $word1 The first word.
+	 * @param string $word2 The second word.
+	 * @return int The Hamming distance.
+	 */
 	function getHammingDistance($word1,$word2)
 	{
 		$distance=0;
@@ -416,6 +521,13 @@
 			
 	}
 	
+	/**
+	 * Calculates the distance between two words, using Hamming for equal length strings and Levenshtein otherwise.
+	 *
+	 * @param string $word1 The first word.
+	 * @param string $word2 The second word.
+	 * @return int The calculated distance.
+	 */
 	function getDistanceBetweenWords($word1,$word2)
 	{
 		$distance=0;
@@ -436,6 +548,12 @@
 		}
 	}
 	
+	/**
+	 * Prints a 2D array in a simple, pipe-delimited format for debugging.
+	 *
+	 * @param array $match2dArray The 2D array to print.
+	 * @return void|null
+	 */
 	function print2dArray($match2dArray)
 	{
 		
@@ -456,9 +574,12 @@
 			echo "<br>\n";
 	}
 	
-	/* Return the other supported language which should be different from the current one
-	*  Mainly EN/AR 
-	*/
+	/**
+	 * Returns the other supported language, toggling between 'AR' and 'EN'.
+	 *
+	 * @param string $currentLang The current language code ('AR' or 'EN').
+	 * @return string The toggled language code.
+	 */
 	function toggleLanguage($currentLang)
 	{
 		
@@ -474,6 +595,12 @@
 	}
 	
 
+	/**
+	 * Reads a stop words file and returns an associative array.
+	 *
+	 * @param string $stopWordsFile The path to the stop words file.
+	 * @return array An associative array where keys are the stop words.
+	 */
 	function getStopWordsArrByFile($stopWordsFile)
 	{
 		$stopWordsArrTemp = file($stopWordsFile,FILE_SKIP_EMPTY_LINES  | FILE_IGNORE_NEW_LINES);
@@ -492,6 +619,12 @@
 		return $stopWordsArr;
 	}
 	
+	/**
+	 * Reads a pause marks file and returns an associative array.
+	 *
+	 * @param string $pauseMarksFile The path to the pause marks file.
+	 * @return array An associative array where keys are the pause marks.
+	 */
 	function getPauseMarksArrByFile($pauseMarksFile)
 	{
 
@@ -738,12 +871,27 @@
 		
 	}
 	
+	/**
+	 * Strips HTML comments from a string.
+	 *
+	 * @param string $xmlContent The input string, potentially containing HTML comments.
+	 * @return string The string with HTML comments removed.
+	 */
 	function stripHTMLComments($xmlContent)
 	{
 		return (preg_replace('/<!--.*-->/s', "", $xmlContent));
 
 	}
 	
+	/**
+	 * Finds the corresponding Quranic Arabic Corpus (QAC) segment index for a given Qurana segment.
+	 *
+	 * @param int    $suraID                 The Sura ID.
+	 * @param int    $verseID                The Verse ID.
+	 * @param int    $verseLocalSegmentIndex The local index of the segment within the verse according to Qurana corpus.
+	 * @param string $quranaSegmentForm      The Arabic form of the segment from the Qurana corpus.
+	 * @return int The matching QAC segment index, or -1 if not found.
+	 */
 	function getQACSegmentByQuranaSeqment($suraID,$verseID,$verseLocalSegmentIndex,$quranaSegmentForm)
 	{
 		$masterIDPrefix = "$suraID:$verseID:";
@@ -799,6 +947,16 @@
 		return $matchingSegmentLocation;
 		
 	}
+
+	/**
+	 * Finds the word index within a verse for a given QAC segment ID.
+	 *
+	 * @param array $qacMasterSegmentTable The master table of QAC segments.
+	 * @param int   $suraID                The Sura ID.
+	 * @param int   $verseID               The Verse ID.
+	 * @param int   $segmentID             The QAC segment ID.
+	 * @return int|null The word index if found, otherwise null.
+	 */
 	function getWordIndexByQACSegment($qacMasterSegmentTable,$suraID,$verseID,$segmentID)
 	{
 		$masterIDPrefix = "$suraID:$verseID:";
@@ -839,6 +997,17 @@
 		
 	}
 	
+	/**
+	 * Stores a single value in the APC cache with a structured key.
+	 *
+	 * @param string $lang       The language code.
+	 * @param string $model      The model name.
+	 * @param string $modelKey   The key within the model.
+	 * @param string $entryKey   The specific entry key.
+	 * @param mixed  $entryValue The value to store.
+	 * @return void
+	 * @throws Exception If the value cannot be stored in the cache.
+	 */
 	function addValueToMemoryModel($lang,$model,$modelKey,$entryKey,$entryValue)
 	{
 		$apcMemoryEntryKey = "$lang/$model/$modelKey/$entryKey";
@@ -853,6 +1022,14 @@
 		
 	}
 	
+	/**
+	 * Updates an entry in the APC cache.
+	 *
+	 * @param string $key             The cache key.
+	 * @param mixed  $valueOrValueArr The new value to store.
+	 * @return void
+	 * @throws Exception If the value cannot be updated in the cache.
+	 */
 	function updateModelData($key,$valueOrValueArr)
 	{
 		$res = apc_store($key,$valueOrValueArr);
@@ -867,6 +1044,15 @@
 		
 	}
 	
+	/**
+	 * Retrieves a single entry from the APC cache using a structured key.
+	 *
+	 * @param string $lang     The language code.
+	 * @param string $model    The model name.
+	 * @param string $modelKey The key within the model.
+	 * @param string $entryKey The specific entry key.
+	 * @return mixed The cached value.
+	 */
 	function getModelEntryFromMemory($lang,$model,$modelKey,$entryKey)
 	{
 		
@@ -879,6 +1065,15 @@
 	
 	}
 	
+	/**
+	 * Checks if a single entry exists in the APC cache using a structured key.
+	 *
+	 * @param string $lang     The language code.
+	 * @param string $model    The model name.
+	 * @param string $modelKey The key within the model.
+	 * @param string $entryKey The specific entry key.
+	 * @return bool True if the entry exists, false otherwise.
+	 */
 	function modelEntryExistsInMemory($lang,$model,$modelKey,$entryKey)
 	{
 	
@@ -889,6 +1084,17 @@
 	
 	}
 	
+	/**
+	 * Appends a value to an array stored in the APC cache. If the entry doesn't exist, it creates a new array.
+	 *
+	 * @param string $lang       The language code.
+	 * @param string $model      The model name.
+	 * @param string $modelKey   The key within the model.
+	 * @param string $entryKey   The specific entry key.
+	 * @param mixed  $entryValue The value to append to the array.
+	 * @return void
+	 * @throws Exception If the value cannot be stored in the cache.
+	 */
 	function addToMemoryModelList($lang,$model,$modelKey,$entryKey,$entryValue)
 	{
 		$apcMemoryEntryKey = "$lang/$model/$modelKey/$entryKey";
@@ -916,6 +1122,13 @@
 	
 	}
 	
+	/**
+	 * Adds multiple entries to the APC cache in a single batch operation.
+	 *
+	 * @param array $entryKeysValuesArr An associative array where keys are cache keys and values are the data to store.
+	 * @return void
+	 * @throws Exception If the batch operation fails.
+	 */
 	function addToMemoryModelBatch($entryKeysValuesArr)
 	{
 
@@ -936,6 +1149,12 @@
 	
 	}
 	
+	/**
+	 * Returns an APCIterator for a given regular expression pattern.
+	 *
+	 * @param string $apcKeyRegExpPattern The regular expression to match against cache keys.
+	 * @return APCIterator An iterator for the matching cache entries.
+	 */
 	function getAPCIterator($apcKeyRegExpPattern)
 	{
 		return new APCIterator('user', "/$apcKeyRegExpPattern/");
@@ -946,6 +1165,14 @@
 	
 	
 	
+	/**
+	 * Retrieves the text of a verse based on a QAC location string.
+	 *
+	 * @param array  $QURAN_TEXT          The main Quran text array.
+	 * @param string $qac3PartLocationStr The QAC location string (e.g., "sura:aya:word").
+	 * @return string The text of the verse.
+	 * @throws Exception If the location string is invalid.
+	 */
 	function getVerseByQACLocation($QURAN_TEXT,$qac3PartLocationStr)
 	{
 		
@@ -973,6 +1200,13 @@
 		
 	}
 	
+	/**
+	 * Retrieves the text of a verse by its Sura and Aya number.
+	 *
+	 * @param int $sura The Sura number (1-based).
+	 * @param int $aya  The Aya (verse) number (1-based).
+	 * @return string The text of the verse.
+	 */
 	function getVerseTextBySuraAndAya($sura, $aya)
 	{
 		
@@ -982,6 +1216,12 @@
 	
 	}
 	
+	/**
+	 * Extracts the word index from a 3-part QAC location string.
+	 *
+	 * @param string $qac3PartLocationStr The QAC location string (e.g., "sura:aya:word").
+	 * @return string The word index part of the location string.
+	 */
 	function  getWordIndexFromQACLocation($qac3PartLocationStr)
 	{
 		$locationArr = preg_split("/\:/", $qac3PartLocationStr);
@@ -990,6 +1230,14 @@
 		return  $locationArr[2];
 	}
 	
+	/**
+	 * Marks all occurrences of a substring within a text with a given HTML tag.
+	 *
+	 * @param string $text            The text to search within.
+	 * @param string $charsToBeMarked The substring to mark.
+	 * @param string $markingTagName  The HTML tag name to use for marking (e.g., "marked").
+	 * @return string The text with the specified substring marked.
+	 */
 	function markWordWithoutWordIndex($text,$charsToBeMarked,$markingTagName)
 	{
 
@@ -1003,6 +1251,15 @@
 
 	}
 	
+	/**
+	 * Marks a specific word in a text by its index.
+	 *
+	 * @param string $TEXT            The full text of the verse.
+	 * @param int    $wordIndex       The zero-based index of the word to mark (after removing pause marks).
+	 * @param string $charsToBeMarked The specific characters within the word to mark.
+	 * @param string $markingTagName  The HTML tag name to use for marking.
+	 * @return string The text with the specified word marked.
+	 */
 	function markSpecificWordInText($TEXT,$wordIndex,$charsToBeMarked,$markingTagName)
 	{
 	
@@ -1031,22 +1288,52 @@
 		 //exit;
 	}
 	
+	/**
+	 * Constructs a QAC location string from Sura, Aya, and word index.
+	 *
+	 * @param int $sura      The Sura number.
+	 * @param int $aya       The Aya (verse) number.
+	 * @param int $wordIndex The word index within the verse.
+	 * @return string The formatted QAC location string (e.g., "sura:aya:word").
+	 */
 	function getQACLocationStr($sura,$aya,$wordIndex)
 	{
 		return "$sura:$aya:$wordIndex";
 	}
 	
+	/**
+	 * Checks if the current environment is the local development environment.
+	 *
+	 * @return bool True if the remote address is 127.0.0.1, false otherwise.
+	 */
 	function isDevEnviroment()
 	{
 		return ($_SERVER['REMOTE_ADDR']=="127.0.0.1" );
 	}
 	
+	/**
+	 * Checks if a given value is a Quranic pause mark.
+	 *
+	 * @param string $value           The character or string to check.
+	 * @param array  $pauseMarksArr   An associative array of standard pause marks.
+	 * @param string $saktaLatifaMark The character for Sakta Latifa.
+	 * @param string $sajdahMark      The character for Sajdah.
+	 * @return bool True if the value is a pause mark, false otherwise.
+	 */
 	function isPauseMark($value,$pauseMarksArr,$saktaLatifaMark,$sajdahMark)
 	{
 		
 		
 		return (isset($pauseMarksArr[$value]) || $value == $saktaLatifaMark || $value == $sajdahMark);
 	}
+
+	/**
+	 * Removes all pause mark entries from an array of words.
+	 *
+	 * @param array $pauseMarksArr The associative array of pause marks.
+	 * @param array $targetArr     The array of words to filter.
+	 * @return array The filtered array with pause marks removed.
+	 */
 	function removePauseMarksFromArr($pauseMarksArr,$targetArr)
 	{
 		global $saktaLatifaMark,$sajdahMark;
@@ -1069,6 +1356,12 @@
 	}
 	
 	
+	/**
+	 * Removes all pause mark characters from a verse string.
+	 *
+	 * @param string $verseText The text of the verse.
+	 * @return string The verse text with all pause marks removed.
+	 */
 	function removePauseMarkFromVerse($verseText)
 	{
 		global $saktaLatifaMark,$sajdahMark;
@@ -1086,6 +1379,12 @@
 		return $verseText;
 	}
 	
+	/**
+	 * Retrieves a word's corresponding form from the Uthmani-to-Simple mapping table.
+	 *
+	 * @param string $simpleOrUthmaniWord The word to look up (can be in either script).
+	 * @return string The corresponding word in the other script.
+	 */
 	function getItemFromUthmaniToSimpleMappingTable($simpleOrUthmaniWord)
 	{
 		$entry =  getModelEntryFromMemory("AR", "OTHERS", "UTHMANI_TO_SIMPLE_WORD_MAP", $simpleOrUthmaniWord);
@@ -1094,12 +1393,26 @@
 
 	}
 	
+	/**
+	 * Gets the word index in Simple script for a corresponding Uthmani script word index within a verse.
+	 *
+	 * @param string $verseLocation    The verse location string (e.g., "sura:aya").
+	 * @param int    $uthmaniWordIndex The 1-based index of the word in Uthmani script.
+	 * @return int The corresponding 1-based word index in Simple script.
+	 */
 	function getSimpleWordIndexByUthmaniWordIndex($verseLocation,$uthmaniWordIndex)
 	{
 		$verseMappignArr = getModelEntryFromMemory("AR", "OTHERS", "UTHMANI_TO_SIMPLE_LOCATION_MAP", $verseLocation);
 
 		return $verseMappignArr[$uthmaniWordIndex];
 	}
+
+	/**
+	 * Gets the Imla'i (Simple script) word index from a full Uthmani QAC location string.
+	 *
+	 * @param string $uthmaniQACLocation The full QAC location string (e.g., "sura:aya:word").
+	 * @return int The corresponding word index in Simple script.
+	 */
 	function getImla2yWordIndexByUthmaniLocation($uthmaniQACLocation)
 	{
 		
@@ -1112,6 +1425,14 @@
 		return  $emla2tWordIndex;
 	}
 	
+	/**
+	 * Retrieves a specific word from a verse string by its index (after removing pause marks).
+	 *
+	 * @param array  $PAUSEMARKS        An associative array of pause marks.
+	 * @param string $verseText         The full text of the verse.
+	 * @param int    $oneBasedWordIndex The 1-based index of the word to retrieve.
+	 * @return string The word at the specified index.
+	 */
 	function getWordFromVerseByIndex($PAUSEMARKS,$verseText, $oneBasedWordIndex)
 	{
 		$wordsArr = preg_split("/ /", $verseText);
@@ -1123,6 +1444,12 @@
 		return $wordsArr[$oneBasedWordIndex-1];
 	}
 	
+	/**
+	 * Checks for an SQLite error and returns a user-friendly message.
+	 *
+	 * @param SQLite3 $sqliteDBObj The SQLite3 database connection object.
+	 * @return string|void An error message string if an error occurred, otherwise void.
+	 */
 	function handleDBError($sqliteDBObj)
 	{
 		$lastError = $sqliteDBObj->lastErrorCode();
@@ -1142,6 +1469,12 @@
 		}
 	}
 	
+	/**
+	 * Finds the shortest word in an array of strings.
+	 *
+	 * @param array $arr The array of words.
+	 * @return string The shortest word found in the array.
+	 */
 	function findSmallestWordInArray($arr)
 	{
 		$smallestLength = 999;
@@ -1171,7 +1504,11 @@
 		
 	}
 	
-	
+	/**
+	 * Loads the Uthmani data model from the APC cache.
+	 *
+	 * @return mixed The cached Uthmani data model.
+	 */
 	function loadUthmaniDataModel()
 	{
 		return  apc_fetch("MODEL_CORE[AR_UTH]");
@@ -1181,18 +1518,33 @@
 
 	
 	
+	/**
+	 * Loads the Uthmani-to-Simple word mapping table from the APC cache.
+	 *
+	 * @return mixed The cached mapping table.
+	 */
 	function loadUthmaniToSimpleMappingTable()
 	{
 		return apc_fetch("UTHMANI_TO_SIMPLE_WORD_MAP");
 	}
 	
+	/**
+	 * Loads the Lemma-to-Simple word mapping table from the APC cache.
+	 *
+	 * @return mixed The cached mapping table.
+	 */
 	function loadLemmaToSimpleMappingTable()
 	{
 		return apc_fetch("LEMMA_TO_SIMPLE_WORD_MAP");
 	}	
 
 	
-	// doen not contain tashkeel
+	/**
+	 * Checks if a word is in Simple Arabic script (i.e., does not contain Tashkeel).
+	 *
+	 * @param string $str The word to check.
+	 * @return bool True if the word is in Simple script, false otherwise.
+	 */
 	function isSimpleQuranWord($str)
 	{
 		if ( removeTashkeel($str)==$str) return true;
@@ -1200,6 +1552,12 @@
 		return false;
 	}
 	
+	/**
+	 * Initializes an array item with zero if it is empty.
+	 *
+	 * @param mixed &$arrItem The array item, passed by reference.
+	 * @return void
+	 */
 	function initArrayWithZero(&$arrItem)
 	{
 		if ( empty($arrItem))
@@ -1208,6 +1566,12 @@
 		}
 	}
 	
+	/**
+	 * Prepares data for plotting a histogram by storing it in the session and creating an iframe.
+	 *
+	 * @param array $data The data to be plotted.
+	 * @return void
+	 */
 	function plotHistogram($data)
 	{
 		session_start();
@@ -1217,6 +1581,12 @@
 		echo "</IFRAME>";
 	}
 	
+	/**
+	 * Converts an associative array to a CSV format and prints it to the output.
+	 *
+	 * @param array $data The associative array to convert.
+	 * @return void
+	 */
 	function arrayToCSV($data)
 	{
 		foreach($data as $key=>$val)
@@ -1225,6 +1595,12 @@
 		}
 	}
 	
+	/**
+	 * Creates a frequency histogram (as an associative array) from a simple array of values.
+	 *
+	 * @param array $data The input array of values.
+	 * @return array An associative array where keys are the unique values and values are their frequencies.
+	 */
 	function histogramFromArray($data)
 	{
 		$histoBins = array();
@@ -1241,6 +1617,13 @@
 		
 	}
 	
+	/**
+	 * Advances the internal pointer of an array by a specified number of moves.
+	 *
+	 * @param array &$arr          The array, passed by reference.
+	 * @param int   $numberOfMoves The number of times to call `next()`.
+	 * @return void
+	 */
 	function advanceArrayCounter(&$arr,$numberOfMoves)
 	{
 		for($i=0;$i<$numberOfMoves;$i++)
@@ -1249,8 +1632,12 @@
 		}
 	}
 	
-	/*
-	 * $threshold: frequency of verse repetition, returned verses will have freq more than the specified threshold
+	/**
+	 * Finds all repeated verses in the Quranic text.
+	 *
+	 * @param string $lang      The language code ('AR' or 'EN').
+	 * @param int    $threshold The minimum frequency for a verse to be considered repeated.
+	 * @return array An associative array where keys are the repeated verses and values are their frequencies.
 	 */
 	function getRepeatedVerses($lang,$threshold=1)
 	{
@@ -1297,9 +1684,14 @@
 			return $repeatedVerses;
 	}
 
-	/*
-	 * $threshold: frequency of Ngrams repetition, returned ngrams with frequency more than the specified threshold
-	*/
+	/**
+	 * Extracts all N-grams of a specific size from the Quranic text.
+	 *
+	 * @param string $lang      The language code ('AR' or 'EN').
+	 * @param int    $n         The size of the N-gram (e.g., 2 for bigrams, 3 for trigrams).
+	 * @param int    $threshold The minimum frequency for an N-gram to be included in the results.
+	 * @return array An associative array where keys are the N-grams and values are their frequencies.
+	 */
 	function getNGrams($lang,$n,$threshold=0)
 	{
 		global $numberOfSuras,$mandatoryStop,$saktaLatifaMark,$sajdahMark;
@@ -1442,9 +1834,13 @@
 	}
 	
 	
-	/*
-	 * $threshold: frequency of PoS-Ngrams repetition, returned ngrams with frequency more than the specified threshold
-	*/
+	/**
+	 * Finds sequences of words (n-grams) that match a given Part-of-Speech (POS) pattern.
+	 *
+	 * @param string $posPatternString A space-separated string of POS tags (e.g., "PN V").
+	 * @param int    $threshold        The minimum frequency for a POS n-gram to be included in the results.
+	 * @return array An associative array where keys are the matching word sequences and values are their frequencies.
+	 */
 	function getPoSNGrams($posPatternString,$threshold=0)
 	{
 		global $numberOfSuras,$quranCorpusMorphologyFile;
@@ -1625,6 +2021,17 @@
 		
 	}
 	
+	/**
+	 * Gathers comprehensive information about a given word from various data models.
+	 *
+	 * @param string $word         The word to get information for.
+	 * @param array  $MODEL_CORE   The core data model.
+	 * @param array  $MODEL_SEARCH The search data model (inverted index).
+	 * @param array  $MODEL_QAC    The QAC data model.
+	 * @param bool   $fast         If true, stops processing after finding the first verse.
+	 * @param bool   $exactWord    If true, performs an exact match for the word in the verse.
+	 * @return array|null An associative array of word information, or null if not found.
+	 */
 	function getWordInfo($word,$MODEL_CORE,$MODEL_SEARCH,$MODEL_QAC,$fast=FALSE,$exactWord=FALSE)
 	{
 
@@ -1859,11 +2266,24 @@
 		return $wordInfoArr;
 	}
 	
+	/**
+	 * Displays a technical error message in a styled div.
+	 *
+	 * @param string $error The error message to display.
+	 * @return void
+	 */
 	function showTechnicalError($error)
 	{
 		echoN("<div id='technical-error'>$error</div>");
 	}
 	
+	/**
+	 * Finds the 1-based index of a key in an associative array.
+	 *
+	 * @param array  $arr     The associative array.
+	 * @param string $sentKey The key to find.
+	 * @return int The 1-based index of the key.
+	 */
 	function getKeyIndexFromArray($arr, $sentKey)
 	{
 		$counter =1;

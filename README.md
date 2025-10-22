@@ -1,119 +1,103 @@
-# QuranAnalysis (QA) Project
+# QuranAnalysis Project
 
-# Introduction
+## Introduction
 
-The goal of this project is to build a Semantic Search and Intelligence System for the Quran, providing normal users and scholars the ability to search the Quran semantically, analyse all aspects of the text, find hidden patterns and associations using state-of-the-art visualization techniques.
+The QuranAnalysis (QA) Project is a semantic search and intelligence system for the Holy Quran. It provides users, scholars, and researchers with a powerful suite of tools to search the Quran semantically, analyze various aspects of the text, and discover hidden patterns and associations through state-of-the-art visualization techniques.
 
-**http://www.qurananalysis.com**
+This project was started as an MSc project at the University of Leeds in 2015, supervised by Eric Atwell. It aims to build upon previous research and provide an open-source framework for Quranic analysis that can facilitate research, boost applications, and foster innovation in this field.
 
-QA started as an MSc project at the University of Leeds in 2015 supervised by Eric Atwell. The project aimed to glu-together and build on previous research done in the university providing an opensource framework for Quran Analysis work, a framework which can facilitate research, boost applications and foster innovation in that area.
+**Website:** [http://www.qurananalysis.com](http://www.qurananalysis.com)
 
-More information can be found in my Thesis below
+**Thesis:** [QuranAnalysis: A Semantic Search and Intelligence System for the Quran](https://www.researchgate.net/publication/282648776_QuranAnalysis_A_Semantic_Search_and_Intelligence_System_for_the_Quran)
 
-[QuranAnalysis: A Semantic Search and Intelligence System for the Quran](https://www.researchgate.net/publication/282648776_QuranAnalysis_A_Semantic_Search_and_Intelligence_System_for_the_Quran)
+## Features
 
-Feel free to use QA in your research or applications, also contributions are welcome.
+- **Semantic Search:** Go beyond keyword matching and search the Quran based on conceptual meaning and context.
+- **Question Answering:** Ask natural language questions about the Quran.
+- **Comprehensive Analysis Tools:** A rich suite of tools for linguistic and statistical analysis, including word frequency, n-grams, POS patterns, collocations, and more.
+- **Interactive Visualizations:** Explore the Quran's concepts and their relationships through interactive graphs and word clouds.
+- **Rich Data Resources:** Access a wealth of processed data, including a custom Quranic ontology, Uthmani-to-Simple script mappings, and detailed word information.
 
+## Technology Stack
 
-## How can you benefit from QA ?
+- **Backend:** PHP
+- **Frontend:** HTML, CSS, JavaScript, jQuery
+- **Data Visualization:** D3.js
+- **Database:** SQLite (for user feedback and mailing list)
+- **Caching:** APC (Alternative PHP Cache) for performance.
 
+## Setup and Installation
 
-Assuming you are a developer or researcher, with more than 20,000 lines of code you can benefit in many ways as explained below
+Follow these steps to set up the QuranAnalysis project on a local server.
 
-- Access to language corpus and resources (inlcuding QA Ontology)
-- Reusable code and algorithms
-- Libraries for various tasks around Arabic Language handling, Data Model manipulation, NLP, Semantics, and Quran specifics
-- QA Ontology extraction module
-- Search Engine, Question Answering and Semantic Application Implementation
-- Novel D3 visualzation techniques
-- Speed up prototyping by reusing QA user interface
+### Prerequisites
 
-## QA Unique Resources
+- A web server with PHP support (e.g., Apache, Nginx).
+- PHP version 5.4 or higher.
+- The `php-sqlite3` extension for SQLite3 support.
+- The `php-apc` or `php-apcu` extension for caching. This is crucial for performance as the application loads large data models into memory.
 
-1. **QA Ontology**: OWL file including rich concepts, relations and metadata from the Quran
-2. **Stopwords Lists**: Quranic stop words lists
-3. **Simple to Uthmani Mapping File**: A file containing one-to-one mapping between simple and uthmani words from the Quran
-4. **Qurana to QAC segment Mapping File**: QAC and Qurana has different segments counts. The file includes one-to-one mapping between QAC and Qurana segment numbers
-5. **Longest Common Substrings in the Quran**: A file containing all common substrings in the Quran - extracted using LCS algorithm
+### Installation Steps
 
-## External Resources used in QA
+1.  **Clone the Repository:**
+    ```bash
+    git clone https://github.com/karimouda/qurananalysis.git
+    cd qurananalysis
+    ```
 
-1. Tanzil Project - Quran Text: Authentic Simple/Uthmani text of the the Quran 
-2. Tanzil Project - Quran Translation: English translation corpus of the Quran 
-3. Tanzil Project - Quran Transliteration: English transliteration corpus of the Quran 
-4. Quranic Arabic Corpus: PoS tagged corpus of the Quran with morphological annotations 
-5. Quranic Arabic Corpus Word-by-Word: Word by word Arabic-English translation corpus of the Quran (Edited & not up to date)
-6. Qurana: Corpus of the Quran annotated with Pronominal Anaphora
-7. Wordnet: English dictionary and thesaurus corpus 
-8. DBPedia: semantic structured data extracted from Wikipedia 
-9. D3 Javascript Library 
-10. JQuery and JQuery Tagcloud Javascript Libraries
-11. TinySort Javascript Library
-12. OWLLib PHP Library 
-13. Microsoft Translator API 
-14. PHPir PoS Tagging Library 
-15. Brown corpus lexicon for English PoS Tagging 
-16. English stop-words project 
-17. OpenOffice ar.dic file 
-18. Arabic stopwords list from Ar-PHP project
-19. TextMiningTheQuran stop-words list
-20. Limited number of basic English and Arabic stopwords taken from
+2.  **Set up the Web Server:**
+    - Point your web server's document root to the cloned `qurananalysis` directory.
+    - Ensure your server has write permissions for the `data/databases/` and `data/cache/` directories, as well as the log files in `data/logs/`.
 
+3.  **Configure API Keys (Optional):**
+    - The application uses the Microsoft Translator API for some translation tasks. To enable this, you need to add your own credentials in `libs/microsoft.translator.api.lib.php`.
+    - Open the file and replace `"YOUR_ID"` and `"YOUR_SECRET"` with your actual Client ID and Client Secret.
 
-## Libraries
-* charts.lib.php
-* core.lib.php
-* custom.translation.table.lib.php
-* graph.lib.php
-* microsoft.translator.api.lib.php
-* ontology.lib.php
-* pos.tagger.lib.php
-* question.answering.lib.php
-* search.lib.php
-* wordnet.lib.php
-* owllib
+4.  **Load Data Models into Cache:**
+    - The application relies on pre-processed data models that are loaded into APC for fast access. The first time you run the application, these models need to be generated and cached.
+    - Open your web browser and navigate to the `admin/reload-models.php` script:
+      ```
+      http://<your-local-domain>/admin/reload-models.php
+      ```
+    - This script will clear any existing cache and then load all the necessary data from the raw files into APC. This process may take a few minutes. You should see a "DONE" message upon completion.
 
-List of functions can be found [here](https://github.com/karimouda/qurananalysis/wiki/Libraries-&-Functions)
+5.  **Run the Application:**
+    - Once the models are loaded, navigate to the project's root URL in your browser:
+      ```
+      http://<your-local-domain>/
+      ```
+    - The homepage should now be fully functional.
 
+## Usage
 
-## WIKI
+The application is divided into three main sections:
 
-https://github.com/karimouda/qurananalysis/wiki
+-   **Search:** The main interface for searching the Quran. It supports simple keywords, phrases (in quotes), and natural language questions.
+-   **Explore:** An interactive visualization of the Quranic ontology. Click on concepts to explore related topics and verses.
+-   **Analyze:** A collection of powerful tools for in-depth linguistic and statistical analysis of the text.
 
-### Setup
-https://github.com/karimouda/qurananalysis/wiki/Setup
+## Project Structure
 
-### Tutorials
-https://github.com/karimouda/qurananalysis/wiki/Tutorials
+The repository is organized into the following key directories:
 
-### Project Structure
-https://github.com/karimouda/qurananalysis/wiki/Project-Structure
-
-### Ideas
-https://github.com/karimouda/qurananalysis/wiki/Future-Work-Ideas
-
-## Notes
-
-I am sorry that some parts in the code are messy, undocumented and not well designed, this is due to shortage of time, stress and the novelty aspect of the project which lead me to focus more on research, coding and thesis writing to meet deadlines. I thought releasing the code this way is much better than waiting until i have time to clean it up which can take forever.
+-   `admin/`: Scripts for administrative tasks, such as data generation and ontology extraction.
+-   `analysis/`: Contains the UI and backend logic for the various analysis tools.
+-   `dal/`: The Data Access Layer, currently containing the SQLite wrapper.
+-   `data/`: All raw data files, corpora, ontologies, and cache files.
+-   `explore/`: The exploratory search interface.
+-   `info/`: Static informational pages (About, FAQ, etc.).
+-   `libs/`: Core PHP libraries and third-party JavaScript libraries.
+-   `search/`: The backend logic for the main search functionality.
+-   `services/`: AJAX endpoints for features like feedback and subscriptions.
+-   `test/`: Test scripts for evaluating system accuracy.
+-   `tools/`: Utility tools, such as plotting scripts.
 
 ## License
 
-    Quran Analysis (www.qurananalysis.com). Full Semantic Search and Intelligence System for the Quran.
-    Copyright (C) 2015  Karim Ouda
+This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
 
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
+This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
+You should have received a copy of the GNU General Public License along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-    You should have received a copy of the GNU General Public License
-    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-    You can use Quran Analysis code, framework and corpora in your website
-    or application (commercial/non-commercial) provided that you link
-    back to www.qurananalysis.com and sufficient credits are given.
+You can use Quran Analysis code, framework, and corpora in your website or application (commercial/non-commercial) provided that you link back to [www.qurananalysis.com](http://www.qurananalysis.com) and sufficient credits are given.

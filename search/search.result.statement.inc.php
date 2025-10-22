@@ -1,4 +1,18 @@
 <?php
+/**
+ * Search Result Summary Statement Template
+ *
+ * This script is a template partial included by the main search AJAX services.
+ * It is responsible for rendering the summary statement at the top of the
+ * search results.
+ *
+ * It displays the total number of verses found and lists the expanded query terms
+ * that were actually used in the search. It also includes a "share" link and a
+ * hidden panel that can be toggled to show a permanent, shareable URL for the
+ * current search query.
+ *
+ * @package QuranAnalysis
+ */
 #   PLEASE DO NOT REMOVE OR CHANGE THIS COPYRIGHT BLOCK
 #   ====================================================================
 #

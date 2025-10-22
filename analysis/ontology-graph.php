@@ -1,4 +1,20 @@
-<?php 
+<?php
+/**
+ * Ontology Graph Visualization Page
+ *
+ * This script provides the user interface for visualizing the ontological concepts
+ * within a specific chapter (Sura) of the Quran.
+ *
+ * It features a dropdown menu populated with all the Suras. When a user selects a
+ * Sura, JavaScript updates the `src` attribute of an embedded iframe, pointing it to
+ * `graphing.iframe.php` with the selected Sura's index. This iframe then renders
+ * the actual D3.js force-directed graph for that chapter.
+ *
+ * The page also includes a link to open a separate view (`ontology-full-quran-graph.php`)
+ * that displays the entire ontology.
+ *
+ * @package QuranAnalysis
+ */
 #   PLEASE DO NOT REMOVE OR CHANGE THIS COPYRIGHT BLOCK
 #   ====================================================================
 #

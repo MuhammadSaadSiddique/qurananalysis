@@ -1,4 +1,21 @@
-<?php 
+<?php
+/**
+ * AJAX Service for Buckwalter Transliteration
+ *
+ * This script provides a real-time transliteration service between Arabic script
+ * and Buckwalter transliteration. It is designed to be called via an AJAX request.
+ *
+ * The script expects a 'text' parameter in the GET request. It automatically
+ * detects if the input text is Arabic.
+ * - If the text is Arabic, it converts it to Buckwalter transliteration.
+ * - If the text is not Arabic, it attempts to perform a reverse transliteration
+ *   from Buckwalter to Arabic.
+ *
+ * The result is returned as an HTML snippet ready to be injected into the calling page.
+ * It includes error handling for invalid Buckwalter input.
+ *
+ * @package QuranAnalysis
+ */
 #   PLEASE DO NOT REMOVE OR CHANGE THIS COPYRIGHT BLOCK
 #   ====================================================================
 #

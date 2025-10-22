@@ -31,6 +31,15 @@ require_once(dirname(__FILE__)."/core.lib.php");
 $CUSTOM_TRANSLATION_TABLE_EN_AR = array();
 $TABLE_LOADED = false;
 
+/**
+ * Loads the custom translation table from the file into a global array.
+ *
+ * The function reads the translation file, parses each line, and populates
+ * the global `$CUSTOM_TRANSLATION_TABLE_EN_AR` array. It also sets the
+ * global `$TABLE_LOADED` flag to true.
+ *
+ * @return array The loaded translation table.
+ */
 function loadTranslationTable()
 {
 	global $customTranslationTableFile;
@@ -66,6 +75,13 @@ function loadTranslationTable()
 	return $CUSTOM_TRANSLATION_TABLE_EN_AR;
 }
 
+/**
+ * Checks if a given English or Arabic string is found in the translation table with a specific type.
+ *
+ * @param string $enArStr  The string to look for (can be English or Arabic).
+ * @param string $wordType The type of the word (e.g., "CONCEPT").
+ * @return bool True if the entry is found and valid, false otherwise.
+ */
 function isFoundInTranslationTable($enArStr,$wordType="CONCEPT")
 {
 	global $CUSTOM_TRANSLATION_TABLE_EN_AR;
@@ -78,6 +94,12 @@ function isFoundInTranslationTable($enArStr,$wordType="CONCEPT")
 		 	 !empty($CUSTOM_TRANSLATION_TABLE_EN_AR[$enArStr]['AR_TEXT']) && !empty($CUSTOM_TRANSLATION_TABLE_EN_AR[$enArStr]['EN_TEXT']) );
 }
 
+/**
+ * Cleans and trims a string specifically for translation table lookups.
+ *
+ * @param string $str The input string.
+ * @return string The cleaned and trimmed string.
+ */
 function tranlstationCleanAndTrim($str)
 {
 	//« spoils arabic words = 0xab
@@ -86,6 +108,13 @@ function tranlstationCleanAndTrim($str)
 }
 
 
+/**
+ * Checks if a given Arabic string is found in the translation table as a value with a specific type.
+ *
+ * @param string $arStr    The Arabic string to search for.
+ * @param string $wordType The type of the word (e.g., "CONCEPT").
+ * @return bool True if a matching entry is found, false otherwise.
+ */
 function isFoundInTranslationTableArabicKeyword($arStr,$wordType="CONCEPT")
 {
 	global $CUSTOM_TRANSLATION_TABLE_EN_AR;
@@ -109,6 +138,12 @@ function isFoundInTranslationTableArabicKeyword($arStr,$wordType="CONCEPT")
 }
 
 
+/**
+ * Retrieves a translation entry from the table by its English keyword.
+ *
+ * @param string $enStr The English keyword to look up.
+ * @return array|false The translation entry array if found, false otherwise.
+ */
 function getTranlationEntryByEntryKeyword($enStr)
 {
 	global $CUSTOM_TRANSLATION_TABLE_EN_AR,$TABLE_LOADED;
@@ -122,6 +157,12 @@ function getTranlationEntryByEntryKeyword($enStr)
 	
 	return $CUSTOM_TRANSLATION_TABLE_EN_AR[$enStr];
 }
+/**
+ * Retrieves a translation entry from the table by its Arabic keyword.
+ *
+ * @param string $arStr The Arabic keyword to search for.
+ * @return array|false The translation entry array if found, false otherwise.
+ */
 function getTranlationEntryByArabicEntryKeyword($arStr)
 {
 	global $CUSTOM_TRANSLATION_TABLE_EN_AR,$TABLE_LOADED;
@@ -139,6 +180,15 @@ function getTranlationEntryByArabicEntryKeyword($arStr)
 
 
 
+/**
+ * Adds or updates an entry in the translation table.
+ *
+ * @param string $enStr     The English string.
+ * @param string $entryType The type of the entry (e.g., "CONCEPT", "NONE").
+ * @param string $arStr     The Arabic string.
+ * @param string $keyLang   The primary language for the key ('EN' or 'AR').
+ * @return bool True on successful addition.
+ */
 function addTranslationEntry($enStr, $entryType, $arStr,$keyLang="EN")
 {
 	global $CUSTOM_TRANSLATION_TABLE_EN_AR,$TABLE_LOADED;
@@ -182,6 +232,13 @@ function addTranslationEntry($enStr, $entryType, $arStr,$keyLang="EN")
 
 }
 
+/**
+ * Removes unaccepted characters from a string for the translation table.
+ * Replaces parentheses with brackets and removes pipe, carriage return, and newline characters.
+ *
+ * @param string $text The input text.
+ * @return string The cleaned text.
+ */
 function removeUnacceptedChars($text)
 {
 	$text = strtr($text, "(", "[");
@@ -190,14 +247,20 @@ function removeUnacceptedChars($text)
 	return preg_replace("/\||\\r|\\n/", "", $text);
 }
 
-function persistTranslationTable($CUSTOM_TRANSLATION_TABLE_EN_AR=null)
+/**
+ * Persists the current state of the translation table back to its file.
+ *
+ * @param array|null $CUSTOM_TRANSLATION_TABLE_EN_AR_PARAM Optional. The translation table to persist. If null, the global table is used.
+ * @return bool False if the table is not loaded or empty, otherwise void.
+ */
+function persistTranslationTable($CUSTOM_TRANSLATION_TABLE_EN_AR_PARAM=null)
 {
 	global $customTranslationTableFile;
 	global $CUSTOM_TRANSLATION_TABLE_EN_AR,$TABLE_LOADED;
 	
-	if (!empty($CUSTOM_TRANSLATION_TABLE_EN_AR))
+	if (!empty($CUSTOM_TRANSLATION_TABLE_EN_AR_PARAM))
 	{
-		 $CUSTOM_TRANSLATION_TABLE_EN_AR = $CUSTOM_TRANSLATION_TABLE_EN_AR;
+		 $CUSTOM_TRANSLATION_TABLE_EN_AR = $CUSTOM_TRANSLATION_TABLE_EN_AR_PARAM;
 	}
 	
 	
@@ -235,6 +298,11 @@ function persistTranslationTable($CUSTOM_TRANSLATION_TABLE_EN_AR=null)
 }
 
 
+/**
+ * Prints the entire translation table to the output.
+ *
+ * @return bool False if the table is not loaded, otherwise void.
+ */
 function printTranslationTable()
 {
 

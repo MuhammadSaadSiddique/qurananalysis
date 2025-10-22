@@ -1,4 +1,21 @@
-<?php 
+<?php
+/**
+ * Basic Corpus Statistics Page
+ *
+ * This script generates a page displaying basic statistical information about the
+ * Quranic corpus. It retrieves pre-computed totals and metrics from the core data model
+ * and presents them in a series of tables.
+ *
+ * The statistics include:
+ * - General totals for chapters, verses, words, and letters.
+ * - Information about pause marks and special characters (for Arabic).
+ * - Minimum, maximum, and average lengths for words and verses.
+ * - A detailed table with per-chapter counts for verses, words, and characters.
+ *
+ * The page uses the standard analysis section templates to ensure a consistent layout.
+ *
+ * @package QuranAnalysis
+ */
 #   PLEASE DO NOT REMOVE OR CHANGE THIS COPYRIGHT BLOCK
 #   ====================================================================
 #

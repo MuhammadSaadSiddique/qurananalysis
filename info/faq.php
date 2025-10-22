@@ -1,3 +1,18 @@
+<?php
+/**
+ * FAQ Page Content
+ *
+ * This file contains the HTML content for the "Frequently Asked Questions" page.
+ * It provides answers to common questions regarding the search engine's features,
+ * the English translation used, the relevance calculation method, and the
+ * accuracy of the question-answering system. It also embeds a Facebook comments
+ * plugin to allow users to ask further questions.
+ *
+ * It is included by `info/index.php` when the 'page' GET parameter is set to 'faq'.
+ *
+ * @package QuranAnalysis
+ */
+?>
 <!--
 #   PLEASE DO NOT REMOVE OR CHANGE THIS COPYRIGHT BLOCK
 #   ====================================================================
@@ -78,4 +93,3 @@ So far the accuracy is 33% for answering questions in English language. However 
 	<br>
 	<br>
 <div class="fb-comments" data-href="http://qurananalysis.com/info/index.php?page=feedback" data-numposts="5"></div>
-	

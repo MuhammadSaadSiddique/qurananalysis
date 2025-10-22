@@ -1,4 +1,24 @@
-<?php 
+<?php
+/**
+ * Strict Arabic Stopwords Generator (Level 2)
+ *
+ * This script generates a strict, level-2 list of Arabic stopwords by analyzing
+ * the Part-of-Speech (POS) tags from the Quranic Arabic Corpus (QAC).
+ *
+ * The methodology is as follows:
+ * 1. It iterates through all words in the QAC.
+ * 2. It identifies words that are NOT tagged as Noun (N), Proper Noun (PN), or
+ *    Adjective (ADJ), treating them as functional (stop) words.
+ * 3. It includes special logic to handle determiners (DET) to avoid incorrectly
+ *    classifying nouns that are part of a determiner-noun pair.
+ * 4. The script compiles a unique list of these functional words.
+ *
+ * The final list is written to `data/quran-stop-words.strict.l2.ar`. This is a
+ * developer tool for data generation.
+ *
+ * @package QuranAnalysis
+ * @author Karim Ouda
+ */
 #   PLEASE DO NOT REMOVE OR CHANGE THIS COPYRIGHT BLOCK
 #   ====================================================================
 #

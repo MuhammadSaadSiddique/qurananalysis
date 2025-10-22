@@ -1,4 +1,14 @@
 <?php
+/**
+ * Main Header Template
+ *
+ * This file contains the HTML and PHP code for the website's main header.
+ * It includes the Google Analytics tracking script (for non-local environments)
+ * and the Facebook SDK for social features. It also renders the top
+ * navigation bar with links to various pages like Home, About, FAQ, etc.
+ *
+ * @package QuranAnalysis
+ */
 #   PLEASE DO NOT REMOVE OR CHANGE THIS COPYRIGHT BLOCK
 #   ====================================================================
 #

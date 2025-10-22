@@ -26,6 +26,12 @@
 require_once(dirname(__FILE__)."/../libs/core.lib.php");
 require_once(dirname(__FILE__)."/custom.translation.table.lib.php");
 
+/**
+ * Maps a Quranic Arabic Corpus (QAC) Part-of-Speech (POS) tag to a WordNet POS tag.
+ *
+ * @param string $qacPOS The QAC POS tag (e.g., "N", "V", "ADJ").
+ * @return string The corresponding WordNet POS tag (e.g., "noun", "verb", "adj"). Defaults to "noun".
+ */
 function mapQACPoSToWordnetPoS($qacPOS)
 {
 	
@@ -38,12 +44,26 @@ function mapQACPoSToWordnetPoS($qacPOS)
 	}
 	return  strtr($qacPOS,$trans);
 }
+
+/**
+ * Trims leading conjunctions (waw and fa) from an Arabic verb.
+ * Note: The implementation comment suggests this might be a problematic function.
+ *
+ * @param string $verb The Arabic verb.
+ * @return string The verb with leading conjunctions removed.
+ */
 function trimVerb($verb)
 {
 	//very bad idea, spoils everything
 	return preg_replace("/^(وَ|فَ)/um", "", $verb);
 }
 
+/**
+ * Checks if a given Part-of-Speech (POS) pattern constitutes a noun phrase.
+ *
+ * @param string $posPattern The POS pattern string.
+ * @return bool True if the pattern is a recognized noun phrase, false otherwise.
+ */
 function isNounPhrase($posPattern)
 {
 	return ( $posPattern=="N" || $posPattern=="PN" || $posPattern=="DET N"
@@ -52,7 +72,11 @@ function isNounPhrase($posPattern)
 }
 
 
-
+/**
+ * Generates a structured array with empty values for a new concept's metadata.
+ *
+ * @return array An associative array with predefined keys for concept metadata.
+ */
 function generateEmptyConceptMetadata()
 {
 	return array("LEM"=>"","FREQ"=>0,
@@ -63,6 +87,13 @@ function generateEmptyConceptMetadata()
 			"DBPEDIA_LINK"=>"","WIKIPEDIA_LINK"=>"", "IMAGES"=>"", "DESC_EN"=>array(), "DESC_AR"=>array());
 }
 
+/**
+ * Searches an array of terms for an entry matching a given simple word.
+ *
+ * @param array  $finalTerms     The array of final terms to search through.
+ * @param string $sentSimpleWord The simple word to find.
+ * @return array|false The term array if found, false otherwise.
+ */
 function getTermArrBySimpleWord($finalTerms, $sentSimpleWord)
 {
 
@@ -84,6 +115,17 @@ function getTermArrBySimpleWord($finalTerms, $sentSimpleWord)
 	return false;
 }
 
+/**
+ * Adds a new concept to the final concepts array if it doesn't already exist.
+ *
+ * @param array  &$finalConceptsArr The array of final concepts, passed by reference.
+ * @param string $newConceptName    The name of the new concept.
+ * @param string $coneptType        The type of the concept (e.g., "T-BOX", "A-BOX").
+ * @param string $exPhase           The extraction phase during which the concept was identified.
+ * @param int    $freq              The frequency of the concept.
+ * @param string $engTranslation    The English translation of the concept.
+ * @return bool True if the concept was added, false if it already existed (though it might be updated).
+ */
 function addNewConcept(&$finalConceptsArr,$newConceptName,$coneptType,$exPhase,$freq,$engTranslation)
 {
 
@@ -125,6 +167,12 @@ function addNewConcept(&$finalConceptsArr,$newConceptName,$coneptType,$exPhase,$
 	
 }
 
+/**
+ * Prints a formatted string representation of a relation for debugging.
+ *
+ * @param array $relationArrEntry An associative array representing a single relation.
+ * @return void
+ */
 function printRelation($relationArrEntry)
 {
 	 
@@ -132,7 +180,19 @@ function printRelation($relationArrEntry)
 }
 
 
-
+/**
+ * Adds a new relation to the relations array if it's unique, otherwise increments its frequency.
+ *
+ * @param array  &$relationArr        The array of relations, passed by reference.
+ * @param string $type                The type of the relation (e.g., "TAXONOMIC", "NON-TAXONOMIC").
+ * @param string $subject             The subject of the relation.
+ * @param string $verbSimple          The simple form of the verb.
+ * @param string $object              The object of the relation.
+ * @param string $posPattern          The Part-of-Speech pattern associated with the relation.
+ * @param string $verbEngTranslation  The English translation of the verb.
+ * @param string $verbUthmani         The Uthmani script form of the verb.
+ * @return bool True if a new relation was added, false if an existing one was updated.
+ */
 function addNewRelation(&$relationArr,$type,$subject,$verbSimple,$object,$posPattern,$verbEngTranslation,$verbUthmani)
 {
 	$newRelation= array("TYPE"=>$type,"SUBJECT"=>trim($subject),
@@ -161,6 +221,19 @@ function addNewRelation(&$relationArr,$type,$subject,$verbSimple,$object,$posPat
 	}
 }
 
+/**
+ * Processes and adds a new relation to the relations array, handling various normalizations and translations.
+ *
+ * @param array  &$relationsArr      The array of relations, passed by reference.
+ * @param string $type               The type of the relation.
+ * @param string $subject            The subject of the relation (can be Uthmani or simple).
+ * @param string $verb               The verb of the relation (can be Uthmani or simple).
+ * @param string $object             The object of the relation (can be Uthmani or simple).
+ * @param string $joinedPattern      The joined POS pattern for the relation.
+ * @param string $verbEngTranslation Optional English translation of the verb. If empty, it will be generated.
+ * @param string $fullVerbQuranWord  Optional full Quranic word for the verb, used for translation.
+ * @return bool|null The result from addNewRelation, or false if subject or object is empty.
+ */
 function addRelation(&$relationsArr,$type, $subject,$verb,$object,$joinedPattern,$verbEngTranslation="",$fullVerbQuranWord="")
 {
 	global $WORDS_TRANSLATIONS_AR_EN;
@@ -348,6 +421,12 @@ function addRelation(&$relationsArr,$type, $subject,$verb,$object,$joinedPattern
 	return addNewRelation($relationsArr,$type,$subjectSimple,$verbSimple,$objectSimple,$joinedPattern,$verbEngTranslation,$verbUthmani);
 }
 
+/**
+ * Resolves pronouns for a given QAC location by looking up their antecedents in the Qurana model.
+ *
+ * @param string $qacLocation The QAC location string (e.g., "3:146:11").
+ * @return array An array of resolved concept names for the pronoun.
+ */
 function resolvePronouns($qacLocation)
 {
 	global $MODEL_QURANA;
@@ -373,6 +452,19 @@ function resolvePronouns($qacLocation)
 	return $pronArr;
 }
 
+/**
+ * Flushes or processes a set of collected concepts to form relations.
+ * This function is used within a loop to create relations from concepts that have been identified in sequence.
+ * It handles cases with 2 or 3 concepts and resets the state for the next iteration.
+ *
+ * @param array  &$relationsArr   The main array of relations, passed by reference.
+ * @param array  &$conceptsArr    The array of concepts collected for the current relation, passed by reference.
+ * @param string &$verb           The verb connecting the concepts, passed by reference.
+ * @param string &$lastSubject    The last subject identified, used for context, passed by reference.
+ * @param string $ssPoSPattern    The Part-of-Speech pattern for the sub-sentence.
+ * @param int    &$filledConcepts A counter for the number of filled concepts, passed by reference.
+ * @return void
+ */
 function flushProperRelations(&$relationsArr,&$conceptsArr,&$verb,&$lastSubject,$ssPoSPattern,&$filledConcepts)
 {
 
@@ -437,7 +529,13 @@ function flushProperRelations(&$relationsArr,&$conceptsArr,&$verb,&$lastSubject,
 	
 	
 
-
+/**
+ * Finds a concept's simple word name by one of its Uthmani segments.
+ *
+ * @param array  $conceptsArr The array of concepts to search through.
+ * @param string $segment     The Uthmani segment to search for.
+ * @return string|false The simple word of the concept if found, false otherwise.
+ */
 function getConceptBySegment($conceptsArr, $segment)
 {
 	foreach ($conceptsArr as $conceptName=>$conceptArr)
@@ -462,6 +560,13 @@ function getConceptBySegment($conceptsArr, $segment)
 	return false;
 }
 
+/**
+ * Finds a concept's simple word name by its lemma.
+ *
+ * @param array  $conceptsArr The array of concepts to search through.
+ * @param string $lemma       The lemma to search for.
+ * @return string|false The simple word of the concept if found, false otherwise.
+ */
 function getConceptByLemma($conceptsArr, $lemma)
 {
 	foreach ($conceptsArr as $conceptName=>$conceptArr)
@@ -485,6 +590,13 @@ function getConceptByLemma($conceptsArr, $lemma)
 	return false;
 }
 
+/**
+ * Attempts to determine a concept's type (e.g., its parent class) from an English description text.
+ * It uses Part-of-Speech tagging to find patterns like "is a [type]".
+ *
+ * @param string $abstract The English description text.
+ * @return string|false The determined concept type if found, false otherwise.
+ */
 function getConceptTypeFromDescriptionText($abstract)
 {
 	$matches = array();
@@ -531,7 +643,14 @@ function getConceptTypeFromDescriptionText($abstract)
 }
 
 
-/** Returns words from QAC by PoS tags - grouped by lemma **/
+/**
+ * Retrieves and processes words from the Quranic Arabic Corpus (QAC) based on a specific Part-of-Speech (POS) tag.
+ * The results are grouped by lemma and populated into the final terms array.
+ *
+ * @param array  &$finalTerms The array of final terms to populate, passed by reference.
+ * @param string $POS         The POS tag to filter by (e.g., "N", "V").
+ * @return array The populated final terms array.
+ */
 function getWordsByPos(&$finalTerms,$POS)
 {
 
@@ -690,6 +809,12 @@ function getWordsByPos(&$finalTerms,$POS)
 	return $finalTerms;
 }
 
+/**
+ * Loads a list of excluded items of a specific type from a file.
+ *
+ * @param string $type The type of exclusion list to load (e.g., "concepts", "verbs").
+ * @return array An associative array of the excluded items.
+ */
 function loadExcludesByType($type)
 {
 	$fileArr = file("../data/ontology/extraction/cleaner/excluded.$type",FILE_IGNORE_NEW_LINES|FILE_SKIP_EMPTY_LINES);
@@ -708,6 +833,11 @@ function loadExcludesByType($type)
 	
 }
 
+/**
+ * Loads the list of excluded synonyms from a file.
+ *
+ * @return array An associative array of the excluded synonyms.
+ */
 function loadExcludedSynonymssArr()
 {
 	$fileArr = file("../data/ontology/extraction/excluded.synonyms",FILE_IGNORE_NEW_LINES|FILE_SKIP_EMPTY_LINES);
@@ -725,11 +855,23 @@ function loadExcludedSynonymssArr()
 
 }
 
+/**
+ * Converts a class name into an XML-friendly string by replacing spaces with underscores.
+ *
+ * @param string $className The input class name.
+ * @return string The XML-friendly class name.
+ */
 function getXMLFriendlyString($className)
 {
 	return strtr($className, " ", "_");
 }
 
+/**
+ * Strips the ontology namespace from a class name.
+ *
+ * @param string $className The class name, potentially with a namespace prefix.
+ * @return string The class name without the namespace.
+ */
 function stripOntologyNamespace($className)
 {
 	global $qaOntologyNamespace;
@@ -747,6 +889,13 @@ function stripOntologyNamespace($className)
 	return $className;
 }
 
+/**
+ * Checks if a concept has any subclasses within the given set of relations.
+ *
+ * @param array  $relationsArr The array of all relations.
+ * @param string $concept      The concept to check.
+ * @return bool True if the concept has subclasses, false otherwise.
+ */
 function conceptHasSubclasses($relationsArr,$concept)
 {
 	global $is_a_relation_name_ar;
@@ -771,6 +920,13 @@ function conceptHasSubclasses($relationsArr,$concept)
 	
 	return false;
 }
+/**
+ * Checks if a concept has any parent classes within the given set of relations.
+ *
+ * @param array  $relationsArr The array of all relations.
+ * @param string $concept      The concept to check.
+ * @return bool True if the concept has parent classes, false otherwise.
+ */
 function conceptHasParentClasses($relationsArr,$concept)
 {
 	global $is_a_relation_name_ar;
@@ -794,11 +950,26 @@ function conceptHasParentClasses($relationsArr,$concept)
 }
 
 
+/**
+ * Builds a unique hash ID for a relation based on its subject, verb, and object.
+ *
+ * @param string $subject The subject of the relation.
+ * @param string $verb    The verb of the relation.
+ * @param string $object  The object of the relation.
+ * @return string The MD5 hash of the concatenated subject, verb, and object.
+ */
 function buildRelationHashID($subject,$verb,$object)
 {
 	return md5("$subject,$verb,$object");
 }
 
+/**
+ * Checks if a given word is part of a verb in the ontology's verb index.
+ *
+ * @param string $word The word to check.
+ * @param string $lang The language of the word ('EN' or 'AR').
+ * @return array|false The verb array from the index if a match is found, false otherwise.
+ */
 function isWordPartOfAVerbInVerbIndex($word,$lang)
 {
 
@@ -828,6 +999,17 @@ function isWordPartOfAVerbInVerbIndex($word,$lang)
 	return false;
 }
 
+/**
+ * Handles the creation of a new concept that was identified from a relation's subject or object.
+ * This function is typically called when a subject or object in a relation does not already exist in the main concepts list.
+ *
+ * @param array   &$finalConcepts             The main array of final concepts, passed by reference.
+ * @param string  $subjectOrObject            The subject or object string to be handled.
+ * @param string  $conceptLocationInRelation  Indicates if the concept is a "SUBJECT" or "OBJECT".
+ * @param int     &$notInCounceptsCounter     A counter for concepts not found, passed by reference.
+ * @param array   &$statsUniqueSubjects       An array to track unique subjects, passed by reference.
+ * @return void
+ */
 function handleNewConceptFromRelation(&$finalConcepts,$subjectOrObject,$conceptLocationInRelation,&$notInCounceptsCounter,&$statsUniqueSubjects)
 {
 	global  $WORDS_TRANSLATIONS_AR_EN;
@@ -896,6 +1078,12 @@ function handleNewConceptFromRelation(&$finalConcepts,$subjectOrObject,$conceptL
 }
 
 
+/**
+ * Checks if an extended query array (word => POS tag) contains a significant verb.
+ *
+ * @param array $extendedQueryArr The extended query array.
+ * @return bool True if a verb other than "is" or "are" is found, false otherwise.
+ */
 function doesQuestionIncludesVerb($extendedQueryArr)
 {
 	foreach($extendedQueryArr as $word => $pos)
@@ -911,11 +1099,27 @@ function doesQuestionIncludesVerb($extendedQueryArr)
 	return false;
 }
 
+/**
+ * Calculates a "richness score" for a concept based on the length of its printed representation.
+ * This is a proxy for the amount of information available for the concept.
+ *
+ * @param array $coneptArr The concept array.
+ * @return int The length of the string representation of the concept array.
+ */
 function getConceptRichnessScore($coneptArr)
 {
 	return strlen(print_r($coneptArr,true));
 }
 
+/**
+ * Updates all occurrences of a concept's name within the relations array.
+ * This is used when merging concepts, to ensure all relations point to the new concept name.
+ *
+ * @param array  &$relationsArr The array of relations, passed by reference.
+ * @param string $nameFrom      The old concept name.
+ * @param string $nameTo        The new concept name.
+ * @return void
+ */
 function updateNameInAllRelations(&$relationsArr, $nameFrom, $nameTo)
 {
 	$relationsArrComp = $relationsArr;
@@ -953,6 +1157,13 @@ function updateNameInAllRelations(&$relationsArr, $nameFrom, $nameTo)
 	 $relationsArr = $relationsArrComp;
 }
 
+/**
+ * Finds all concepts from the ontology that are present in a given text.
+ *
+ * @param string $text The text to search for concepts in.
+ * @param string $lang The language of the text ('EN' or 'AR').
+ * @return array An array of concept objects found in the text.
+ */
 function getConceptsFoundInText($text,$lang)
 {
 	

@@ -1,4 +1,19 @@
-<?php 
+<?php
+/**
+ * Uthmani to Simple Script Mapping Page
+ *
+ * This script generates a page that displays a complete mapping of all words in
+ * the Quran from their Uthmani script form to their Simple script equivalent.
+ *
+ * It iterates through the `UTHMANI_TO_SIMPLE_WORD_MAP` data model, which is
+ * retrieved from the cache, and presents the word pairs in a two-column table.
+ * This provides a comprehensive reference for the orthographic differences between
+ * the two scripts as represented in the corpus.
+ *
+ * The page uses the standard analysis section templates for a consistent layout.
+ *
+ * @package QuranAnalysis
+ */
 #   PLEASE DO NOT REMOVE OR CHANGE THIS COPYRIGHT BLOCK
 #   ====================================================================
 #

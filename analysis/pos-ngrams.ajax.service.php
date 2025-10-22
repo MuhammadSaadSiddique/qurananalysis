@@ -1,4 +1,18 @@
-<?php 
+<?php
+/**
+ * AJAX Service for Part-of-Speech (POS) N-Gram Generation
+ *
+ * This script serves as an AJAX endpoint for the POS Patterns (N-Grams) analysis tool.
+ * It receives a POS pattern string (e.g., "PN V") as the 'parameter' in a GET request.
+ *
+ * The script calls the `getPoSNGrams()` function, which processes the Quranic corpus
+ * to find all sequences of words that match the given grammatical pattern.
+ *
+ * The results, including the matching word sequences and their frequencies, are
+ * formatted into an HTML table and returned to the client for display.
+ *
+ * @package QuranAnalysis
+ */
 #   PLEASE DO NOT REMOVE OR CHANGE THIS COPYRIGHT BLOCK
 #   ====================================================================
 #

@@ -1,4 +1,22 @@
-<?php 
+<?php
+/**
+ * AJAX Service for Word Information
+ *
+ * This script serves as the backend for the Word Information analysis tool.
+ * It is designed to be called via an AJAX request to retrieve and display
+ * comprehensive information about a single Arabic word from the Quran.
+ *
+ * It expects the following GET parameter:
+ * - `word`: The Arabic word to look up.
+ *
+ * The script calls the `getWordInfo()` function to gather data from multiple
+ * models (Core, Search, QAC). If the word is found, it formats all the details—
+ * such as simple/Uthmani forms, frequency, TF-IDF weight, root, lemma, POS tags,
+ * features, and verse occurrences—into an HTML table. If the word is not found,
+ * it returns an error and provides suggestions for similar words.
+ *
+ * @package QuranAnalysis
+ */
 #   PLEASE DO NOT REMOVE OR CHANGE THIS COPYRIGHT BLOCK
 #   ====================================================================
 #

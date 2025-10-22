@@ -1,4 +1,18 @@
-<?php 
+<?php
+/**
+ * Main Page for the Analysis Section
+ *
+ * This script serves as the landing page for the "Analysis" section of the website.
+ * It provides a welcome message and a comprehensive list of all the available
+ * analysis and research tools. Each tool is listed with a brief description to
+ * guide the user.
+ *
+ * The page uses the standard analysis section templates (`analysis.template.start.code.php`
+ * and `analysis.template.end.code.php`) to ensure a consistent layout with the
+ * other tools in this section.
+ *
+ * @package QuranAnalysis
+ */
 #   PLEASE DO NOT REMOVE OR CHANGE THIS COPYRIGHT BLOCK
 #   ====================================================================
 #

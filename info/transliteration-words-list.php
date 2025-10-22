@@ -1,4 +1,17 @@
-<!--
+<?php
+/**
+ * Transliterated Words List Page
+ *
+ * This script generates a reference page that displays a complete, alphabetized
+ * list of all unique transliterated words from the Quran.
+ *
+ * It retrieves the `WORDS_TRANSLITERATION` mapping from the cache, cleans each
+ * transliterated word, sorts the list alphabetically, and then renders it as
+ * a simple one-column HTML table. This page is intended to help users understand
+ * the phonetic spellings available for search.
+ *
+ * @package QuranAnalysis
+ */
 #   PLEASE DO NOT REMOVE OR CHANGE THIS COPYRIGHT BLOCK
 #   ====================================================================
 #
@@ -23,7 +36,7 @@
 #    back to www.qurananalysis.com and sufficient credits are given.
 #
 #  ====================================================================
--->
+?>
 <?php 
 require_once("../global.settings.php");
 require_once("../libs/core.lib.php");
@@ -88,10 +101,3 @@ asort($finalTransliteratedWords);
 			</div>
   </body>
 </html>
-
-
-
-
-
-
-

@@ -1,4 +1,20 @@
-<?php 
+<?php
+/**
+ * N-Grams Analysis Tool Page
+ *
+ * This script renders the user interface for the N-Grams analysis tool. It provides
+ * a text input field for the user to specify the 'n' in n-grams (e.g., 2 for bigrams,
+ * 3 for trigrams).
+ *
+ * Upon clicking the "Find" button, a JavaScript function initiates an AJAX call to
+ * the `ngrams.ajax.service.php` backend. The service processes the request,
+ * generates the list of n-grams and their frequencies from the Quranic corpus,
+ * and returns the results as an HTML table, which is then displayed on this page.
+ *
+ * The page uses the standard analysis section templates for a consistent layout.
+ *
+ * @package QuranAnalysis
+ */
 #   PLEASE DO NOT REMOVE OR CHANGE THIS COPYRIGHT BLOCK
 #   ====================================================================
 #

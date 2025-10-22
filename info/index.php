@@ -24,11 +24,31 @@
 #
 #  ====================================================================
 -->
-<?php 
+<?php
+/**
+ * Informational Pages Router and Template
+ *
+ * This script serves as the main entry point and template for all static
+ * informational pages (e.g., About, Contact, FAQ). It uses a 'page' GET
+ * parameter to dynamically include the content from the corresponding PHP file
+ * within a consistent layout.
+ *
+ * It includes the main site header and footer, sets the page title dynamically,
+ * and contains the JavaScript logic for handling the subscription and feedback
+ * form submissions via AJAX.
+ *
+ * @package QuranAnalysis
+ */
 require("../global.settings.php");
 
 $page = $_GET['page'];
 
+/**
+ * Gets the display title for a given page identifier.
+ *
+ * @param string $page The identifier for the page from the GET parameter.
+ * @return string The corresponding title for the page.
+ */
 function getTitleForPage($page)
 {
 	if ( $page=="about")
